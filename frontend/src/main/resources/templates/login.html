@@ -12,8 +12,8 @@
     <title>SB Admin - Login</title>
 
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/static/css/sb-admin.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/sb-admin.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 
 </head>
 
@@ -44,10 +44,10 @@
                         </label>
                     </div>
                 </div>
-                <a class="btn btn-primary btn-block" href="index.html">Login</a>
+                <a class="btn btn-primary btn-block" th:href="@{/login}">Login</a>
             </form>
             <div class="text-center">
-                <a class="d-block small mt-3" href="register.html">Register an Account</a>
+                <a class="d-block small mt-3" th:href="@{/register}">Register an Account</a>
                 <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
             </div>
         </div>
