@@ -4,9 +4,11 @@ import edu.mum.waa.backend.meditation.ws.entity.audit.UserDateAudit;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.Instant;
+import java.time.LocalDate;
+
 @Data
 @Entity
+@Deprecated
 public class TmRetreat extends UserDateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,7 +17,7 @@ public class TmRetreat extends UserDateAudit {
     private long studentId;
 
     @Basic
-    private Instant checkDate;
+    private LocalDate checkDate;
 
     @Override
     public long getId() {

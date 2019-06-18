@@ -38,7 +38,11 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_blocks",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "block_id"))
+    private Set<Block> blocks = new HashSet<>();
     public User(@Size(max = 15) String username, @NotBlank @Size(max = 100) String password) {
         this.username = username;
         this.password = password;
