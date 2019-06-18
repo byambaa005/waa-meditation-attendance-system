@@ -2,6 +2,7 @@ package edu.mum.waa.backend.meditation.ws.controller;
 
 import edu.mum.waa.backend.meditation.ws.controller.crud.RestCrudController;
 import edu.mum.waa.backend.meditation.ws.entity.TmAttendance;
+import edu.mum.waa.backend.meditation.ws.entity.TmCheck;
 import edu.mum.waa.backend.meditation.ws.entity.TmRetreat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/crud/attendance")
 @PreAuthorize("hasRole('USER')")
-public class TmAttendanceController extends RestCrudController<TmAttendance> {
+public class TmAttendanceController extends RestCrudController<TmCheck> {
     private static final Logger logger = LoggerFactory.getLogger(TmAttendanceController.class);
 }
