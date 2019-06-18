@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @Table(name="TmAttendance", uniqueConstraints = {@UniqueConstraint(columnNames ={"Student_Id","Card_Id","Date","Type"})})
-public class TmAttendance extends IdDateAudit {
+public class TmAttendance{
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -67,12 +67,12 @@ public class TmAttendance extends IdDateAudit {
     }
 
 
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-    @Override
-    public long getId(){
-        return this.id;
-    }
+//    @Override
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+//    @Override
+//    public long getId(){
+//        return this.id;
+//    }
 }
