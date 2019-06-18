@@ -1,36 +1,78 @@
 package edu.mum.waa.backend.meditation.ws.entity;
 
-import edu.mum.waa.backend.meditation.ws.entity.audit.UserDateAudit;
-import lombok.Data;
+import edu.mum.waa.backend.meditation.ws.entity.audit.IdDateAudit;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.Instant;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.time.LocalDate;
 
-@Data
 @Entity
-public class TmAttendance extends UserDateAudit {
-
+@Getter
+@Setter
+@NoArgsConstructor
+@Table(name="TmAttendance", uniqueConstraints = {@UniqueConstraint(columnNames ={"Student_Id","Card_Id","Date","Type"})})
+public class TmAttendance extends IdDateAudit {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private  long id;
-    @Basic
-    private long studentId;
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Long id;
 
-    @Basic
-    private LocalDate checkDate;
+    @Column(name = "Student_Id")
+    private Integer studentId;
 
-    @Basic
+
+    @Column(name = "Card_Id")
+    private Long cardId;
+
+    @Past
+    @Column(name = "Date")
+    private LocalDate date;
+
+    @NotNull
+    @Column(name = "Type")
     private String type;
 
-    @Override
-    public long getId() {
-        return this.id;
+    @Column(name = "Location")
+    private String location;
+
+
+    @Column(name = "Name")
+    private String name;
+
+    public TmAttendance(LocalDate date,Integer studentId, String type, String name) {
+        this.studentId = studentId;
+        this.date = date;
+        this.type = type;
+        this.name = name;
     }
+
+    public TmAttendance(Long cardId, Integer studentId, LocalDate date, String type, String location) {
+        this.cardId = cardId;
+        this.studentId=studentId;
+        this.date = date;
+        this.type = type;
+        this.location = location;
+    }
+
+    public TmAttendance(Integer studentId, Long cardId, LocalDate date, String type, String location) {
+        this.studentId = studentId;
+        this.cardId = cardId;
+        this.date = date;
+        this.type = type;
+        this.location = location;
+    }
+
 
     @Override
     public void setId(Long id) {
-        this.id= id;
+        this.id = id;
+    }
+    @Override
+    public long getId(){
+        return this.id;
     }
 }
