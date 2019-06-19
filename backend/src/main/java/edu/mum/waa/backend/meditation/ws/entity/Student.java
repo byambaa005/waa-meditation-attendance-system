@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Data
 public class Student {
-    @Range(min=111, max=999, message ="Id must be in the range 111 to 999")
+//    @Range(min=111, max=999, message ="Id must be in the range 111 to 999")
     @Id
     public long studentId;
 
@@ -23,4 +23,11 @@ public class Student {
     private String  entry;
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<TmCheck> tmCheckList;
+
+    public Student(Long studentId, String entry, String firstName, String lastName){
+        this.studentId=studentId;
+        this.entry=entry;
+        this.firstName=firstName;
+        this.lastName=lastName;
+    }
 }

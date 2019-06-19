@@ -42,4 +42,10 @@ public class TmCheck extends UserDateAudit {
     public void setId(Long id) {
         this.id= id;
     }
+
+    public TmCheck(@PastOrPresent(message = "Tm check date must be current or past") @NotNull(message = "Date must not be null") LocalDate checkedDate, @NotBlank(message = "TM type must be chosen") String tmType, @Valid Student student) {
+        this.checkedDate = checkedDate;
+        this.tmType = tmType;
+        this.student = student;
+    }
 }
