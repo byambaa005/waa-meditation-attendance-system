@@ -1,6 +1,7 @@
 package edu.mum.waa.backend.meditation.ws.entity;
 
 import edu.mum.waa.backend.meditation.ws.entity.audit.IdDateAudit;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,15 +12,13 @@ import javax.validation.constraints.Past;
 import java.time.LocalDate;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 @Table(name="TmAttendance", uniqueConstraints = {@UniqueConstraint(columnNames ={"Student_Id","Card_Id","Date","Type"})})
-public class TmAttendance{
+public class TmAttendance extends IdDateAudit{
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
+    private Long sid;
 
     @Column(name = "Student_Id")
     private Integer studentId;
@@ -67,12 +66,12 @@ public class TmAttendance{
     }
 
 
-//    @Override
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-//    @Override
-//    public long getId(){
-//        return this.id;
-//    }
+    @Override
+    public void setId(Long id) {
+        this.sid = id;
+    }
+    @Override
+    public long getId(){
+        return this.sid;
+    }
 }

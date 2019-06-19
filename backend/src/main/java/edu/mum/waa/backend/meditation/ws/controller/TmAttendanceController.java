@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/crud/attendance")
 @PreAuthorize("hasRole('USER')")
-public class TmAttendanceController extends RestCrudController<TmCheck> {
+public class TmAttendanceController extends RestCrudController<TmAttendance> {
     private static final Logger logger = LoggerFactory.getLogger(TmAttendanceController.class);
+
+
 }
