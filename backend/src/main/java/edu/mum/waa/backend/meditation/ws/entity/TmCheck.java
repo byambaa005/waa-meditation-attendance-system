@@ -1,5 +1,6 @@
 package edu.mum.waa.backend.meditation.ws.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import edu.mum.waa.backend.meditation.ws.entity.audit.UserDateAudit;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,8 +29,8 @@ public class TmCheck extends UserDateAudit {
     @NotBlank(message = "TM type must be chosen")
     private String tmType;
 
-    @Valid
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name="student_id")
     private Student student;
 
@@ -51,5 +52,10 @@ public class TmCheck extends UserDateAudit {
 
     public TmCheck() {
 
+    }
+
+    @Transient
+    public Long getStudentId(){
+        return this.student.studentId;
     }
 }

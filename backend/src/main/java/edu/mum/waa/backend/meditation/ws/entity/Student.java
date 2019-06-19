@@ -21,7 +21,7 @@ public class Student {
 
     @Column(name="Entry")
     private String  entry;
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL )
     private List<TmCheck> tmCheckList;
 
     public Student(Long studentId, String entry, String firstName, String lastName){

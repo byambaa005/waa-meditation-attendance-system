@@ -7,7 +7,11 @@ import edu.mum.waa.backend.meditation.ws.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -27,8 +31,11 @@ public abstract class RestCrudController< T extends IdDateAudit> {
      * @return
      */
     @GetMapping
-    public List<T> retrieveAll() {
-        return repository.findAll();
+    public Page<T> retrieveAll(@RequestParam(defaultValue = "0" , required = false) int page,
+                               @RequestParam(defaultValue = "20" , required = false) int size) {
+        System.out.println("test");
+
+        return repository.findAll(PageRequest.of(page,size));
     }
 
     /**
