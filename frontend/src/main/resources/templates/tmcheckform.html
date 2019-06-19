@@ -14,7 +14,8 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/sb-admin.css}"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
     <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.bundle.min.js}"></script>
@@ -24,62 +25,56 @@
 
 </head>
 
-<body id="page-top">
+<body>
 <nav th:replace="~{fragments/header :: header}">Header</nav>
 <div id="wrapper">
 
     <!-- Sidebar -->
     <ul th:replace="~{fragments/sidebar :: sidebar}">Sidebar</ul>
 
-    <div id="content-wrapper">
 
+    <h2>Create TM</h2>
+    <p class="redirect">
+        <a th:href="@{attendance/tmchecking}">Back to the list</a>
+    </p>
+    <form action="#" th:action="@{/savetmcheck}" th:object="${tm}" method="POST">
+        <fieldset>
 
-        <div class="container">
-            <h2>Create TM Forum</h2>
-            <p class="redirect">
-                <a th:href="@{attendance/tmchecking}">Back to the list</a>
-            </p>
-
-            <form action="#" th:action="@{/savetmcheck}" th:object="${tm}" method="POST">
-
-
-                <div >Student Id
-                    <span class="text"><input type="text" th:field="*{student.studentId}" size="30" /></span></div>
+            <div class="form-group">Student Id
+                <span class="text form-control"><input type="text" th:field="*{student.studentId}" size="30" /></span>
                 <span th:if="${#fields.hasErrors('student.studentId')}" style="color:red;"  th:errors="*{student.studentId}"></span>
-                <div>
-                    Checked Date
-                    <span class="checkdate"><input type="date" th:field="*{checkedDate}" size="30"/></span>
-                    <span th:if="${#fields.hasErrors('checkedDate')}"  style="color:red;" th:errors="*{checkedDate}"></span>
-                </div>
-
-                <div>
-                    <label>TM Type<select th:field="*{tmType}">
-                        <option value="" >--</option>
-                        <option value="tmCheck">TM-Check</option>
-                        <option value="tmRetreat">TM-Retreat</option>
-                    </select>
-                        <span th:if="${#fields.hasErrors('tmType')}" style="color:red;"  th:errors="*{tmType}"></span>
-                    </label>
-
-                </div>
-
-                <div>
-
-                    <input type="submit" value="Checked" class="save" />
-                </div>
-
-                <div class="exception"><span th:text="${message}" style="color:red;"></span></div>
+            </div>
 
 
-            </form>
-        </div>
+            <div class="form-group">
+                Checked Date
+                <span class="checkdate form-control"><input type="date" th:field="*{checkedDate}" size="30"/></span>
+                <span th:if="${#fields.hasErrors('checkedDate')}"  style="color:red;" th:errors="*{checkedDate}"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="form-control">TM Type<select th:field="*{tmType}">
+                    <option value="" >--</option>
+                    <option value="tmCheck">TM-Check</option>
+                    <option value="tmRetreat">TM-Retreat</option>
+                </select>
+                    <span th:if="${#fields.hasErrors('tmType')}" style="color:red;"  th:errors="*{tmType}"></span>
+                </label>
+            </div>
 
 
-        <!-- /.container-fluid -->
+            <div>
 
-        <!-- Sticky Footer -->
-        <div th:replace="~{fragments/footer:: footer}">Footer</div>
-    </div>
+                <input type="submit" value="Checked" class="save" />
+            </div>
+
+            <div class="exception"><span th:text="${message}" style="color:red;"></span></div>
+        </fieldset>
+    </form>
+
+    <!-- Sticky Footer -->
+    <div th:replace="~{fragments/footer:: footer}">Footer</div>
+</div>
 </div>
 <!-- /#wrapper -->
 <!-- Scroll to Top Button-->
@@ -87,8 +82,10 @@
     <i class="fas fa-angle-up"></i>
 </a>
 
+
 <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
