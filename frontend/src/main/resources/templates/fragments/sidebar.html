@@ -9,37 +9,35 @@
 
 <!-- Sidebar -->
 <ul class="sidebar navbar-nav" th:fragment="sidebar">
-    <li class="nav-item">
+    <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}">
         <a class="nav-link" th:href="@{/}">
             <span>Home</span></a>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/attendance/blockreport' ? 'active':''}">
         <a class="nav-link" th:href="@{attendance/blockreport}">
             <span>Report By Block</span></a>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/attendance/entryreport' ? 'active':''}">
         <a class="nav-link" th:href="@{attendance/entryreport}">
             <span>Report By Entry</span></a>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/attendance/tm' ? 'active':''}">
         <a class="nav-link" th:href="@{attendance/tm}">
             <span>TM Report</span></a>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/attendance/detail' ? 'active':''}">
         <a class="nav-link" th:href="@{attendance/detail}">
             <span>Attendance Detail</span></a>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/upload' ? 'active':''}">
         <a class="nav-link" th:href="@{upload}">
             <span>Upload File</span></a>
     </li>
 </ul>
-
-
 </body>
 </html>

@@ -23,7 +23,7 @@ public class Student {
 
     @Column(name="Entry")
     private String  entry;
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL )
     private List<TmCheck> tmCheckList;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -37,5 +37,9 @@ public class Student {
         this.entry=entry;
         this.firstName=firstName;
         this.lastName=lastName;
+    }
+
+    public Student() {
+
     }
 }
