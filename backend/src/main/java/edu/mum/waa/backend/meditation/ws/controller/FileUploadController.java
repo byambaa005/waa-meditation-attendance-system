@@ -16,10 +16,11 @@ public class FileUploadController {
     FileUploadService fileUploadService;
     @PostMapping( "/uploadFile")
     public String submit(@RequestParam("file") MultipartFile file, ModelMap modelMap) {
-        // modelMap.addAttribute("file", file);
-        System.out.println(file.getOriginalFilename());
-        System.out.println(fileUploadService.processFile(file));
-
-        return "fileUploadView";
+        if(fileUploadService.processFile(file)){
+            return "successfull";
+        }
+        else{
+            return "error";
+        }
     }
 }
