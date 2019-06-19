@@ -55,7 +55,7 @@ public class TmCheck extends UserDateAudit {
     }
 
     @Transient
-    public Long getStudentId(){
+    public Integer getStudentId(){
         return this.student.studentId;
     }
 }

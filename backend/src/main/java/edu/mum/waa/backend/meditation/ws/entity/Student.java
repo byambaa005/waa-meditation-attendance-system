@@ -13,7 +13,7 @@ import java.util.Set;
 public class Student {
 //    @Range(min=111, max=999, message ="Id must be in the range 111 to 999")
     @Id
-    public long studentId;
+    public Integer studentId;
 
     @Column(name="First_Name")
     private String firstName;
@@ -34,12 +34,14 @@ public class Student {
             inverseJoinColumns = @JoinColumn(name = "block_id"))
     private Set<Block> blocks = new HashSet<>();
 
-    public Student(Long studentId, String entry, String firstName, String lastName){
+    public Student(Integer studentId, String entry, String firstName, String lastName){
         this.studentId=studentId;
         this.entry=entry;
         this.firstName=firstName;
         this.lastName=lastName;
     }
+
+
 
     public Student() {
 

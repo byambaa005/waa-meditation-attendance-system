@@ -2,9 +2,7 @@ package edu.mum.waa.backend.meditation.ws.entity;
 
 import edu.mum.waa.backend.meditation.ws.entity.audit.IdDateAudit;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -13,6 +11,7 @@ import java.time.LocalDate;
 
 @Entity
 @Data
+@NoArgsConstructor
 @Table(name="TmAttendance", uniqueConstraints = {@UniqueConstraint(columnNames ={"Student_Id","Card_Id","Date","Type"})})
 public class TmAttendance extends IdDateAudit{
 

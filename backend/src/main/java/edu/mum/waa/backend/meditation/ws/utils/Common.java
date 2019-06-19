@@ -16,6 +16,27 @@ public class Common {
         return (int) daysWithoutSunday + (startW == DayOfWeek.SUNDAY ? 1 : 0) + (endW == DayOfWeek.SUNDAY ? 1 : 0);
     }
 
+    public static Double calcExtraPoint(Double percentage){
+        Double extra = 0.0;
+        if(percentage >= 70.0 && percentage<80.0){
+            extra = 0.5;
+        }
+        else if (percentage >=80.0 && percentage<90.0){
+            extra = 1.0;
+        }
+        else if(percentage >=90.0){
+            extra = 1.5;
+        }
+        return extra;
+    }
+    public static Double calcAttendancePercentage(Integer attended, Integer required){
+        System.out.println("attendence: "+attended+" required: "+required);
+           Double percent = 0.0;
+           if (attended != null && required!= null)
+               return ((double) attended/ required)*100.0;
+           return  percent;
+
+    }
 
 //
 //    public static List<LocalDate> getAllDateOfBlock(BlockEntity blockEntity) {
