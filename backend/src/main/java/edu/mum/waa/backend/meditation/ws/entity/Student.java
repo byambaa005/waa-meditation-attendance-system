@@ -1,7 +1,7 @@
 package edu.mum.waa.backend.meditation.ws.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -23,9 +23,11 @@ public class Student {
 
     @Column(name="Entry")
     private String  entry;
+    @JsonIgnore
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL )
     private List<TmCheck> tmCheckList;
 
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "student_blocks",
             joinColumns = @JoinColumn(name = "student_id"),

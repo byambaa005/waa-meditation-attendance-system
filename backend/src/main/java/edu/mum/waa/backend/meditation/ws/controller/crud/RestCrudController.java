@@ -1,7 +1,6 @@
 package edu.mum.waa.backend.meditation.ws.controller.crud;
 
 
-
 import edu.mum.waa.backend.meditation.ws.entity.audit.IdDateAudit;
 import edu.mum.waa.backend.meditation.ws.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
@@ -10,14 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 public abstract class RestCrudController< T extends IdDateAudit> {
@@ -68,7 +65,7 @@ public abstract class RestCrudController< T extends IdDateAudit> {
      * @return
      */
     @PostMapping("/")
-    public ResponseEntity<Object> create(@RequestBody T entity) {
+    public ResponseEntity<Object> create(@Valid @RequestBody T entity) {
         T savedStudent = repository.save(entity);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")

@@ -30,7 +30,7 @@ public class TmCheck extends UserDateAudit {
     private String tmType;
 
     @ManyToOne
-    @JsonIgnore
+//    @JsonIgnore
     @JoinColumn(name="student_id")
     private Student student;
 
