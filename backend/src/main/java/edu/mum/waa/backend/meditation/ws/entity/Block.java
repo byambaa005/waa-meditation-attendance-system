@@ -27,7 +27,7 @@ public class Block {
     private Integer totalDate;
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "blocks")
-    private Set<User> users = new HashSet<>();
+    private Set<Student> students = new HashSet<>();
 
     public Block(Integer blockId, String name, String course, Integer professorId, LocalDate startDate, LocalDate endDate) {
         this.blockId = blockId;

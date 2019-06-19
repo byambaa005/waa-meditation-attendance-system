@@ -4,7 +4,9 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -23,6 +25,12 @@ public class Student {
     private String  entry;
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<TmCheck> tmCheckList;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "student_blocks",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "block_id"))
+    private Set<Block> blocks = new HashSet<>();
 
     public Student(Long studentId, String entry, String firstName, String lastName){
         this.studentId=studentId;
