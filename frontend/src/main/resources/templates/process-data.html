@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Process Attendance Data</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/sb-admin.css}"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+    <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/sb-admin.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+</head>
+<body>
+<nav th:replace="~{fragments/header :: header}">Header</nav>
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul th:replace="~{fragments/sidebar :: sidebar}">Sidebar</ul>
+
+
+    <div id="content-wrapper">
+        <div class="container-fluid">
+            <form th:action="@{/admin/uploadData}" method="POST" enctype="multipart/form-data"
+                  class="form-control-sm" role="form">
+                <fieldset>
+                    <legend class="col-sm-9">Upload a file to process data (100MB):</legend>
+                    <div class="form-group">
+                        <div class="col-sm-9">
+                            Upload File: <input type="file" name="attendance-file"/>
+                            <br/>
+                            <br>
+                            <button class="btn btn-md btn-success" type="Submit">Upload</button>
+                        </div>
+                    </div>
+                    <div class="form-group" th:if="${success != null}">
+                        <div class="col-sm-9">
+                            <h3 th:if="${success}">File has been uploaded!</h3>
+                            <h3 th:if="${!success}">Error, file is not valid!</h3>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <!-- Sticky Footer -->
+        <div th:replace="~{fragments/footer:: footer}">Footer</div>
+    </div>
+</div>
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+</body>
+</html>
