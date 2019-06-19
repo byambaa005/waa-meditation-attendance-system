@@ -14,6 +14,7 @@
     <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/js/sb-admin.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
 </head>
@@ -27,24 +28,25 @@
 
     <div id="content-wrapper">
         <div class="container-fluid">
-            <form th:action="@{/admin/uploadData}" method="POST" enctype="multipart/form-data"
-                  class="form-control-sm" role="form">
+            <!--<form th:action="@{/admin/uploadData}" method="POST" enctype="multipart/form-data"-->
+            <form method="POST" enctype="multipart/form-data"
+                  class="form-control-sm" role="form" id="fileUploadForm" name="fileForm">
                 <fieldset>
                     <legend class="col-sm-9">Upload a file to process data (100MB):</legend>
                     <div class="form-group">
                         <div class="col-sm-9">
-                            Upload File: <input type="file" name="attendance-file"/>
+                            Upload File: <input type="file" name="file" id="file"/>
                             <br/>
                             <br>
-                            <button class="btn btn-md btn-success" type="Submit">Upload</button>
+                            <button class="btn btn-md btn-success" type="Submit" id="btnSubmit">Upload</button>
                         </div>
                     </div>
-                    <div class="form-group" th:if="${success != null}">
-                        <div class="col-sm-9">
-                            <h3 th:if="${success}">File has been uploaded!</h3>
-                            <h3 th:if="${!success}">Error, file is not valid!</h3>
-                        </div>
-                    </div>
+                    <!--<div class="form-group" th:if="${success != null}">-->
+                        <!--<div class="col-sm-9">-->
+                            <!--<h3 th:if="${success}">File has been uploaded!</h3>-->
+                            <!--<h3 th:if="${!success}">Error, file is not valid!</h3>-->
+                        <!--</div>-->
+                    <!--</div>-->
                 </fieldset>
             </form>
         </div>
