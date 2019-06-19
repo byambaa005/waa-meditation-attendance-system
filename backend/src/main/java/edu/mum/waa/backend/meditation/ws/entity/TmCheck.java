@@ -48,4 +48,8 @@ public class TmCheck extends UserDateAudit {
         this.tmType = tmType;
         this.student = student;
     }
+
+    public TmCheck() {
+
+    }
 }

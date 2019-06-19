@@ -10,12 +10,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.net.URL;
 
 @Controller
 public class LoginController {
@@ -28,8 +26,9 @@ public class LoginController {
     @PostMapping("/login")
     public String signin(@Valid @ModelAttribute ("user") LoginRequest loginRequest, Model model, BindingResult bindingResult, HttpSession session) {
 
-        System.out.println("-----------------1-----------------------------");
+        System.out.println("-----------------login credentials-----------------------------");
         System.out.println(loginRequest);
+        System.out.println("-----------------login credentials-----------------------------");
 
         if (bindingResult.hasErrors()) {
             return "login";
