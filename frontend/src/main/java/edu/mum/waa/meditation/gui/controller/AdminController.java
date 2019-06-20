@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Controller
@@ -22,7 +23,10 @@ import java.io.IOException;
 public class AdminController {
 
     @GetMapping("/process")
-    public String processAttendanceData() {
+    public String processAttendanceData(HttpSession session) {
+        if (session.getAttribute("curUser") == null) {
+            return "redirect:/login";
+        }
         return "process-data";
     }
 

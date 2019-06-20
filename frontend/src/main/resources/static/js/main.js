@@ -30,6 +30,7 @@ $(document).ready(function() {
                 console.log("SUCCESS : ", data);
                 $("#btnSubmit").prop("disabled", false);
 
+
             },
             error: function (e) {
 
@@ -43,7 +44,6 @@ $(document).ready(function() {
 
     $("#selectBlock").change(function () {
 
-        console.log("changinggggggg");
         $("#studentDetail").empty();
         let blockId = $('#block option:selected').val();
         if (blockId !== '0') {
@@ -104,6 +104,7 @@ function fire_ajax_submit() {
             $("#result").text(data);
             console.log("SUCCESS : ", data);
             $("#btnSubmit").prop("disabled", false);
+            alert("File uploaded successfully!");
 
         },
         error: function (e) {
@@ -111,7 +112,7 @@ function fire_ajax_submit() {
             $("#result").text(e.responseText);
             console.log("ERROR : ", e);
             $("#btnSubmit").prop("disabled", false);
-
+            alert("Error occured while uploading!");
         }
     });
 

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Login</title>
+    <title>Login</title>
 
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/sb-admin.css}"/>
@@ -23,6 +23,7 @@
     <div class="card card-login mx-auto mt-5">
         <div class="card-header">Logins</div>
         <div class="card-body">
+            <p style="color: red;" class="error" th:if="${error!=null}" th:text="${error}"></p>
             <form th:action="@{/login}" method="POST" th:object="${user}">
                 <div class="form-group">
                     <div class="form-label-group">
