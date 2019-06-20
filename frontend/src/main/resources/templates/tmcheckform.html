@@ -54,8 +54,8 @@
             </div>
 
             <div class="form-group">
-                Checked Date
-                <span ><input class="checkdate form-control " type="date" th:field="*{checkedDate}" size="30"/></span>
+                Checked Date <br/>
+                <span ><input class="checkdate form-control-sm" type="date" th:field="*{checkedDate}" size="30"/></span>
                 <span th:if="${#fields.hasErrors('checkedDate')}"  style="color:red;" th:errors="*{checkedDate}"></span>
             </div>
 
