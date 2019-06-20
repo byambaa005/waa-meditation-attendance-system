@@ -88,6 +88,15 @@ public class UserController {
         return userService.generateReportByEntry(entry.toUpperCase());
 
     }
+
+    @GetMapping("/user/attendance-entry-summary")
+    public BlockSummaryReport facultyReportEntrySummary(@RequestParam(name="entry") String entry){
+        BlockSummaryReport blockSummaryReport = new BlockSummaryReport();
+        blockSummaryReport.setAttendanceList(userService.generateReportByEntry(entry.toUpperCase()));
+        return blockSummaryReport;
+
+    }
+
     @GetMapping("/user/attendance-block-summary")
     public BlockSummaryReport facultyReportSummaryBlock(@RequestParam(name="blockId") Long blockId){
         BlockSummaryReport blockSummaryReport = new BlockSummaryReport();

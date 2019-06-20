@@ -60,7 +60,7 @@ public class ReferenceService {
 
     public BlockSummaryReport  getEntryReports(String entry, HttpSession session){
         RestTemplate restTemplate = new RestTemplate();
-        String studentAttendanceByBlockUrl = "http://localhost:8082/api/user/attendance-entry?entry=" + entry;
+        String studentAttendanceByBlockUrl = "http://localhost:8082/api/user/attendance-entry-summary?entry=" + entry;
         ResponseEntity<BlockSummaryReport> blockResponse = restTemplate.exchange(studentAttendanceByBlockUrl,
                 HttpMethod.GET, new HttpEntity<>("parameters", buildHeader(session)), new ParameterizedTypeReference<BlockSummaryReport>() {});
         BlockSummaryReport studentAttendanceByBlockResponses = blockResponse.getBody();
