@@ -15,11 +15,11 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" th:href="@{/attendance/blockreport}"
+        <a class="nav-link" th:href="@{/report/blockreport}"
            th:if="${session.curUser.roles.contains('ROLE_ADMIN')}">
             <span>Report By Block</span></a>
 
-        <a class="nav-link" th:href="@{/attendance/blockreport}"
+        <a class="nav-link" th:href="@{/report/blockreport}"
            th:unless="${session.curUser.roles.contains('ROLE_USER')}">
             <span>Report By Block</span></a>
     </li>
