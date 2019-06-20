@@ -5,15 +5,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = "/faculty")
+@RequestMapping(value = "/attendance")
 public class FacultyController {
 
-    @GetMapping("/entry")
+    @GetMapping("/entryreport")
     public String entryReport() {
         return "faculty-entry";
     }
 
-    @GetMapping("/block")
+    @GetMapping("/blockreport")
     public String blockReport() {
         return "faculty-block";
     }
