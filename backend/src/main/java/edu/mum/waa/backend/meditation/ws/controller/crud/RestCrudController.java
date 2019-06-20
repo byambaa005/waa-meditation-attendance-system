@@ -64,7 +64,7 @@ public abstract class RestCrudController< T extends IdDateAudit> {
      * @param entity
      * @return
      */
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<Object> create(@Valid @RequestBody T entity) {
         T savedStudent = repository.save(entity);
 

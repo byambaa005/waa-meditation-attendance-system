@@ -31,6 +31,7 @@ public class TmCheck extends UserDateAudit {
 
     @ManyToOne
 //    @JsonIgnore
+    @Valid
     @JoinColumn(name="student_id")
     private Student student;
 
@@ -52,10 +53,5 @@ public class TmCheck extends UserDateAudit {
 
     public TmCheck() {
 
-    }
-
-    @Transient
-    public Integer getStudentId(){
-        return this.student.studentId;
     }
 }
