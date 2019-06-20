@@ -1,39 +1,26 @@
 package edu.mum.waa.meditation.gui.controller;
 
-import com.sun.net.httpserver.Headers;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-import edu.mum.waa.meditation.gui.model.JwtAuthenticationResponse;
-import edu.mum.waa.meditation.gui.model.Student;
 import edu.mum.waa.meditation.gui.model.TmCheckNew;
 import edu.mum.waa.meditation.gui.model.TmCheckResponse;
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.PagedResources;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-import java.lang.invoke.MethodType;
-import java.util.Arrays;
+import javax.validation.Valid;;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+
 
 @Controller
 @RequestMapping("/attendance")
 public class TmCheckingController {
 
     static String BACKEND_URI = "http://localhost:8082/crud/checks";
-
-//    @Autowired
-//    RestTemplate restTemplate;
 
     private HttpHeaders buildHeaders() {
         HttpHeaders headers = new HttpHeaders();
