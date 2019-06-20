@@ -15,17 +15,33 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" th:href="@{/attendance/blockreport}">
+        <a class="nav-link" th:href="@{/attendance/blockreport}"
+           th:if="${session.curUser.roles.contains('ROLE_ADMIN')}">
+            <span>Report By Block</span></a>
+
+        <a class="nav-link" th:href="@{/attendance/blockreport}"
+           th:unless="${session.curUser.roles.contains('ROLE_USER')}">
             <span>Report By Block</span></a>
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" th:href="@{/attendance/entryreport}">
+        <a class="nav-link" th:href="@{/attendance/entryreport}"
+           th:if="${session.curUser.roles.contains('ROLE_ADMIN')}">
             <span>Report By Entry</span></a>
+
+        <a class="nav-link" th:href="@{/attendance/entryreport}"
+           th:unless="${session.curUser.roles.contains('ROLE_USER')}">
+            <span>Report By Entry</span></a>
+
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" th:href="@{/attendance/list}">
+        <a class="nav-link" th:href="@{/attendance/list}"
+           th:if="${session.curUser.roles.contains('ROLE_ADMIN')}">
+            <span>TM Report</span></a>
+
+        <a class="nav-link" th:href="@{/attendance/list}"
+           th:unless="${session.curUser.roles.contains('ROLE_USER')}">
             <span>TM Report</span></a>
     </li>
 
@@ -35,8 +51,10 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" th:href="@{/admin/process}">
+        <a class="nav-link" th:href="@{/admin/process}"
+           th:if="${session.curUser.roles.contains('ROLE_ADMIN')}">
             <span>Upload File</span></a>
+
     </li>
 </ul>
 
