@@ -70,7 +70,7 @@ public class UserController {
     }
 
     @GetMapping("/user/attendance-block")
-    public AttendanceReport facultyReportBlock(@RequestParam(name="blockId") Integer blockId){
+    public AttendanceReport facultyReportBlock(@RequestParam(name="blockId") Long blockId){
 
         AttendanceReport attendanceReport = new AttendanceReport();
 

@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Date;
 import java.util.List;
 
-public interface BlockRepository extends JpaRepository<Block,Integer> {
+public interface BlockRepository extends JpaRepository<Block,Long> {
 
 }

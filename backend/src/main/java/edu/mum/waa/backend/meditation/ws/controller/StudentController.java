@@ -31,7 +31,7 @@ public class StudentController {
     StudentRepository studentRepository;
 
     @GetMapping("/attendance-block")
-    public AttendanceReport generateReportByBlock(@RequestParam(name="studentId") Integer studentId,@RequestParam(name = "blockId") Integer blockId){
+    public AttendanceReport generateReportByBlock(@RequestParam(name="studentId") Integer studentId,@RequestParam(name = "blockId") Long blockId){
 
 
         Block block = new Block();

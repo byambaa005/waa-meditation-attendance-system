@@ -1,6 +1,7 @@
 package edu.mum.waa.backend.meditation.ws.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import edu.mum.waa.backend.meditation.ws.entity.audit.IdDateAudit;
 import edu.mum.waa.backend.meditation.ws.utils.Common;
 import lombok.Data;
 import lombok.Getter;
@@ -19,10 +20,10 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @Table(name="Block")
-public class Block {
+public class Block extends IdDateAudit {
     @Id
 //    @Column(name="block_Id", nullable = false)
-    private Integer blockId;
+    private Long blockId;
     private String name;
     private String course;
     private String professorName;
@@ -34,7 +35,7 @@ public class Block {
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "blocks")
     private Set<Student> students = new HashSet<>();
 
-    public Block(Integer blockId, String name, String course, String professorName, LocalDate startDate, LocalDate endDate) {
+    public Block(Long blockId, String name, String course, String professorName, LocalDate startDate, LocalDate endDate) {
         this.blockId = blockId;
         this.name = name;
         this.course = course;
@@ -44,5 +45,14 @@ public class Block {
         this.totalDate = Common.calcWeekDays(startDate, endDate);
     }
 
+    @Override
+    public long getId() {
+        return this.blockId;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.blockId=id;
+    }
 }
 
