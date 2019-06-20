@@ -37,7 +37,7 @@ public class AdminController {
 
                 HttpHeaders headers = new HttpHeaders();
                 headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-
+//                headers.set("Authorization", "Bearer "+);
                 MultiValueMap<String, Object> body
                         = new LinkedMultiValueMap<>();
 //                body.add("file", file);
