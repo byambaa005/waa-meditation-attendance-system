@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/crud/block")
+@RequestMapping("/crud/blocks")
 @PreAuthorize("hasRole('USER')")
 public class BlockController extends RestCrudController<Block> {
     private static final Logger logger = LoggerFactory.getLogger(BlockController.class);
