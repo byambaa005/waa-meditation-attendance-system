@@ -46,7 +46,9 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" th:href="@{/student/attendance}">
+        <a th:if="${session.curUser.roles.contains('ROLE_STUDENT')}" class="nav-link" th:href="@{/student/attendance}">
+            <span>Attendance Detail</span></a>
+        <a th:if="${session.curUser.roles.contains('ROLE_ADMIN')}" class="nav-link" th:href="@{/student/attendance/admin}">
             <span>Attendance Detail</span></a>
     </li>
 

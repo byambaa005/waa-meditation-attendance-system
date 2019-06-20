@@ -82,4 +82,13 @@ public class StudentController {
         return "student-attendance-block";
     }
 
+    @GetMapping("/attendance/admin")
+    public String getAttendanceAdmin(Model model, HttpSession session) {
+        if (session.getAttribute("curUser") == null) {
+            return "redirect:/login";
+        }
+
+        return "student-attendance-admin";
+    }
+
 }
