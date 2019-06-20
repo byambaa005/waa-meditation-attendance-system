@@ -16,7 +16,7 @@
     </button>
 
     <!-- Navbar Search -->
-    <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0 text-light bg-dark">Hello ${user.firstName}!</div>
+    <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0 text-light bg-dark">Hello <span th:if="${session != null}" th:text="${session.curUser.getUsername()}">User</span>!</div>
     <!-- Navbar -->
     <ul class="navbar-nav ml-auto ml-md-0">
 
@@ -45,8 +45,10 @@
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <form method="post" th:action="@{/logout}">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <input type="submit" value="Logout" class="btn btn-primary" id="logoutButton" />
+                    </form>
                 </div>
             </div>
         </div>
