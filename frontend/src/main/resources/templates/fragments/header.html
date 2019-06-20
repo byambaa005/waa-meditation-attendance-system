@@ -9,14 +9,15 @@
 <!-- this is header -->
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top" th:fragment="header">
 
-    <a class="navbar-brand mr-1" href="index.html">Meditation Attendance System</a>
+    <a class="navbar-brand mr-1" th:href="@{/}">Meditation Attendance System</a>
 
-    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-        <i class="fas fa-bars"></i>
-    </button>
+    <!--<button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">-->
+        <!--<i class="fas fa-bars"></i>-->
+    <!--</button>-->
 
     <!-- Navbar Search -->
     <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0 text-light bg-dark">Hello <span th:if="${session != null}" th:text="${session.curUser.getUsername()}">User</span>!</div>
+
     <!-- Navbar -->
     <ul class="navbar-nav ml-auto ml-md-0">
         <li class="nav-item dropdown no-arrow">

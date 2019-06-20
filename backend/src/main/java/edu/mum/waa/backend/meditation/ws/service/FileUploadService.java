@@ -90,7 +90,6 @@ public class FileUploadService {
                 //add attendance record to list
 
                 if (attendanceRecord != null
-                        && !studentIdList.contains(studentId)
                         && !attendanceList.contains(attendanceRecord)
                         && !tmAttendanceList.contains(attendanceRecord))
                 attendanceList.add(attendanceRecord);

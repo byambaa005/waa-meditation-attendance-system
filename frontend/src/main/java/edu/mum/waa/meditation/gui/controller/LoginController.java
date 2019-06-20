@@ -46,6 +46,8 @@ public class LoginController {
         System.out.println(loginRequest);
         System.out.println("-----------------login credentials-----------------------------");
 
+        String role;
+
         if (bindingResult.hasErrors()) {
             return "login";
         } else {
@@ -94,7 +96,15 @@ public class LoginController {
                  session.setAttribute("studentId", studentInfoResponse.getStudentId());
             }
 
-            return "redirect:/";
+             if (userInfoResponse.getRoles().contains("ROLE_ADMIN")) {
+                 return "redirect:/admin/process";
+             } else if (userInfoResponse.getRoles().contains("ROLE_FACULTY")) {
+                 return "redirect:/report/blockreport";
+             } else {
+                 return "redirect:/student/attendance";
+             }
+
+//            return "redirect:/";
         }
 
     }
