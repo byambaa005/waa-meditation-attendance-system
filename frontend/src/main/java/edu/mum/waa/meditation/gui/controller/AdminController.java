@@ -34,8 +34,8 @@ public class AdminController {
             try {
                 final String uri = "http://localhost:8082/uploadFile";
                 RestTemplate restTemplate = new RestTemplate();
-
                 HttpHeaders headers = new HttpHeaders();
+
                 headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 //                headers.set("Authorization", "Bearer "+);
                 MultiValueMap<String, Object> body

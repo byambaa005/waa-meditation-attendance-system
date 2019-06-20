@@ -30,7 +30,6 @@ public abstract class RestCrudController< T extends IdDateAudit> {
     @GetMapping
     public Page<T> retrieveAll(@RequestParam(defaultValue = "0" , required = false) int page,
                                @RequestParam(defaultValue = "20" , required = false) int size) {
-        System.out.println("test");
 
         return repository.findAll(PageRequest.of(page,size));
     }
@@ -66,6 +65,7 @@ public abstract class RestCrudController< T extends IdDateAudit> {
      */
     @PostMapping
     public ResponseEntity<Object> create(@Valid @RequestBody T entity) {
+        entity.setId(null);
         T savedStudent = repository.save(entity);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")

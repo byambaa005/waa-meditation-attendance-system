@@ -2,20 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Attendance Detail</title>
+    <title>Upload File</title>
 
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/sb-admin.css}"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
     <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.bundle.min.js}"></script>
@@ -32,40 +32,43 @@
     <!-- Sidebar -->
     <ul th:replace="~{fragments/sidebar :: sidebar}">Sidebar</ul>
 
+    <br/>
+    <form th:action="@{/admin/upload}" method="POST" enctype="multipart/form-data"
+          class="form-control-sm" role="form">
+        <fieldset>
+            <legend class="col-sm-9">Choose a file to upload data (100MB): </legend>
+            <br/><br/>
+            <div class="form-group">
+                <div class="col-sm-9">
+                    Upload File: <input type="file" name="mediation-file"/>
+                    <br/>
+                    <br>
+                    <button class="btn btn-md btn-primary" type="Submit">Upload</button>
+                </div>
+            </div>
+            <div class="form-group" th:if="${success != null}">
+                <div class="col-sm-9">
+                    <h3 th:if="${success}">File has been uploaded successfully!</h3>
+                    <h3 th:if="${!success}">Error, file is not uploaded!</h3>
+                </div>
+            </div>
+        </fieldset>
+    </form>
 
-    <div th:fragment="studentDetail" th:unless="${#lists.isEmpty(report)}" id="report-table">
-        <p>Total sessions possible: <span th:text="${report.getTotalSession()}"/></p>
-        <p>Days present: <span th:text="${report.getAttendedCount()}"/></p>
-        <p>Percentage attended:	: <span th:text="${report.getPercentage()}"/></p>
-        <p>Extra credit points:	: <span th:text="${report.getBonusPoint()}"/></p>
-
-        <table class="table table-striped table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl">
-            <thead>
-            <tr>
-                <th class="align-middle">Date</th>
-                <th class="align-middle">Present</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="attendance : ${attendDetails}">
-                <td class="align-middle"><span th:text="${attendance.getDate()}"></span></td>
-                <td class="align-middle"><span th:text="${attendance.getAttended()}"></span></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
     <!-- Sticky Footer -->
     <div th:replace="~{fragments/footer:: footer}">Footer</div>
 </div>
-
-
+</div>
+<!-- /#wrapper -->
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
 
+
 <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -77,11 +80,12 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="../../../../../../../Desktop/templates/login.html">Logout</a>
+                <a class="btn btn-primary" href="login.html">Logout</a>
             </div>
         </div>
     </div>
 </div>
+
 </body>
 
 </html>

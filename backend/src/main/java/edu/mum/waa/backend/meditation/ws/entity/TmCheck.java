@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.PastOrPresent;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ public class TmCheck extends UserDateAudit {
 
 
     @Id
+    @Null
     @GeneratedValue(strategy = GenerationType.AUTO)
     private  long id;
     @PastOrPresent(message="Tm check date must be current or past")

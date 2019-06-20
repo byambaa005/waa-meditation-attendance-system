@@ -32,28 +32,28 @@
     <!-- Sidebar -->
     <ul th:replace="~{fragments/sidebar :: sidebar}">Sidebar</ul>
 
-
+    <div class="container">
     <h2>Create TM</h2>
     <p class="redirect">
-        <a th:href="@{attendance/tmchecking}">Back to the list</a>
+        <a th:href="@{/attendance/list}">Back to the list</a>
     </p>
-    <form action="#" th:action="@{/savetmcheck}" th:object="${tm}" method="POST">
+    <form action="#" th:action="@{/attendance/add}" th:object="${tmcheck}" method="POST">
         <fieldset>
 
-            <div class="form-group">Student Id
-                <span class="text form-control"><input type="text" th:field="*{student.studentId}" size="30" /></span>
+            <div class="form-group">
+                Student Id <br/>
+                <span ><input type="text" th:field="*{student.studentId}" size="30" /></span>
                 <span th:if="${#fields.hasErrors('student.studentId')}" style="color:red;"  th:errors="*{student.studentId}"></span>
             </div>
 
-
             <div class="form-group">
                 Checked Date
-                <span class="checkdate form-control"><input type="date" th:field="*{checkedDate}" size="30"/></span>
+                <span ><input class="checkdate form-control " type="date" th:field="*{checkedDate}" size="30"/></span>
                 <span th:if="${#fields.hasErrors('checkedDate')}"  style="color:red;" th:errors="*{checkedDate}"></span>
             </div>
 
             <div class="form-group">
-                <label class="form-control">TM Type<select th:field="*{tmType}">
+                <label >TM Type:  <select class="form-control" th:field="*{tmType}">
                     <option value="" >--</option>
                     <option value="tmCheck">TM-Check</option>
                     <option value="tmRetreat">TM-Retreat</option>
@@ -65,17 +65,17 @@
 
             <div>
 
-                <input type="submit" value="Checked" class="save" />
+                <input type="submit" value="Checked" class="btn btn-md btn-primary" />
             </div>
 
             <div class="exception"><span th:text="${message}" style="color:red;"></span></div>
         </fieldset>
     </form>
-
+    </div>
     <!-- Sticky Footer -->
     <div th:replace="~{fragments/footer:: footer}">Footer</div>
 </div>
-</div>
+
 <!-- /#wrapper -->
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">

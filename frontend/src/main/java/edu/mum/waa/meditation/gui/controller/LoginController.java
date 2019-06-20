@@ -24,7 +24,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String signin(@Valid @ModelAttribute ("user") LoginRequest loginRequest, Model model, BindingResult bindingResult, HttpSession session) {
+    public String signin(@Valid @ModelAttribute ("user") LoginRequest loginRequest, BindingResult bindingResult, Model model,  HttpSession session) {
 
         System.out.println("-----------------login credentials-----------------------------");
         System.out.println(loginRequest);

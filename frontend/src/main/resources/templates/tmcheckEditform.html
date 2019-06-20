@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Edit TM</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/sb-admin.css}"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+    <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/sb-admin.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+
+</head>
+
+<body>
+<nav th:replace="~{fragments/header :: header}">Header</nav>
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul th:replace="~{fragments/sidebar :: sidebar}">Sidebar</ul>
+
+    <div class="container">
+        <h2>Edit TM</h2>
+        <p class="redirect">
+            <a th:href="@{/attendance/list}">Back to the list</a>
+        </p>
+        <form action="#" th:action="@{/attendance/edit}" th:object="${tmcheck}" method="POST">
+            <fieldset>
+
+                <div class="form-group">
+                    Student Id <br/>
+                    <span ><input type="text" th:field="*{student.studentId}" size="30" readonly/></span>
+                    <span th:if="${#fields.hasErrors('student.studentId')}" style="color:red;"  th:errors="*{student.studentId}"></span>
+                </div>
+
+                <div class="form-group">
+                    Student First Name <br/>
+                    <span ><input type="text" th:field="*{student.firstName}" size="30" readonly/></span>
+                    <span th:if="${#fields.hasErrors('student.firstName')}" style="color:red;"  th:errors="*{student.firstName}"></span>
+                </div>
+
+                <div class="form-group">
+                    Student Last Name <br/>
+                    <span ><input type="text" th:field="*{student.lastName}" size="30" readonly/></span>
+                    <span th:if="${#fields.hasErrors('student.lastName')}" style="color:red;"  th:errors="*{student.lastName}"></span>
+                </div>
+
+                <div class="form-group">
+                    Student Entry <br/>
+                    <span ><input type="text" th:field="*{student.entry}" size="30" readonly/></span>
+                    <span th:if="${#fields.hasErrors('student.entry')}" style="color:red;"  th:errors="*{student.entry}"></span>
+                </div>
+
+
+                <div class="form-group">
+                    Checked Date
+                    <span ><input class="checkdate form-control " type="date" th:field="*{checkedDate}" size="30"readonly/></span>
+                    <span th:if="${#fields.hasErrors('checkedDate')}"  style="color:red;" th:errors="*{checkedDate}"></span>
+                </div>
+
+                <div class="form-group">
+                    <label >TM Type:  <select class="form-control" th:field="*{tmType}">
+                        <option value="" >--</option>
+                        <option value="tmCheck">TM-Check</option>
+                        <option value="tmRetreat">TM-Retreat</option>
+                    </select>
+                        <span th:if="${#fields.hasErrors('tmType')}" style="color:red;"  th:errors="*{tmType}"></span>
+                    </label>
+                </div>
+
+
+                <div>
+
+                    <input type="submit" value="Edit TM" class="btn btn-md btn-primary" />
+                    <input type="hidden" th:field="*{id}" />
+                </div>
+
+                <div class="exception"><span th:text="${message}" style="color:red;"></span></div>
+            </fieldset>
+        </form>
+    </div>
+    <!-- Sticky Footer -->
+    <div th:replace="~{fragments/footer:: footer}">Footer</div>
+</div>
+
+<!-- /#wrapper -->
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

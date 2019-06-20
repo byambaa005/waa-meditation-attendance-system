@@ -38,51 +38,57 @@
             <div class="alert alert-info">
                 <h2>TM Report</h2>
                 <hr/>
-                <a class="btn btn-primary" th:href="@{/tmchecking/add}">Add TM</a>
+                <a class="btn btn-primary" th:href="@{/attendance/gui/add}">Add TM</a>
             </div>
-            <!-- DataTable List -->
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                        <tr>
-                            <th>Student ID</th>
-                            <th>First Name</th>
-                            <th>Checked Date</th>
-                            <th>Entry</th>
-                            <th>TM Type</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
 
-                        <tbody>
-                        <!-- loop over and print our tm checked students -->
-                        <tr th:each="tm:${tms}">
-
-                            <!-- construct an "update" link with customer id -->
-
-
-                            <td th:text="${tm.student.getStudentId()}"></td>
-                            <td th:text="${tm.student.getFirstName()}"></td>
-                            <td th:text="${tm.getCheckedDate()}"></td>
-                            <td th:text="${tm.student.getEntry()}"></td>
-                            <td th:text="${tm.getTmType()}"></td>
-
-                            <!-- display the update link -->
-                            <td>
-                                <a th:href="@{/tmcheckformforupdate(id=${tm.id})}">Edit</a>
-                                |
-                                <a th:href="@{/tmcheckdelete(id=${tm.id})}"
-                                   onclick="if (!(confirm('Are you sure to delete?'))) return false">Delete</a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    Data Table Example
                 </div>
+                <!-- DataTable List -->
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>First Name</th>
+                                <th>Checked Date</th>
+                                <th>Entry</th>
+                                <th>TM Type</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <!-- loop over and print our tm checked students -->
+                            <tr th:each="tm:${tms}">
+
+                                <!-- construct an "update" link with customer id -->
+
+
+                                <td th:text="${tm.student.getStudentId()}"></td>
+                                <td th:text="${tm.student.getFirstName()}"></td>
+                                <td th:text="${tm.getCheckedDate()}"></td>
+                                <td th:text="${tm.student.getEntry()}"></td>
+                                <td th:text="${tm.getTmType()}"></td>
+
+                                <!-- display the update link -->
+                                <td>
+                                    <a th:href="@{'/attendance/guiEdit/'+${tm.id}}">Edit</a>
+                                    |
+                                    <a th:href="@{'/attendance/delete/'+${tm.id}}"
+                                       onclick="if (!(confirm('Are you sure to delete?'))) return false">Delete</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
             </div>
-
         </div>
-
         <!-- Sticky Footer -->
         <div th:replace="~{fragments/footer:: footer}">Footer</div>
     </div>
