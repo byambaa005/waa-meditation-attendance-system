@@ -55,10 +55,26 @@ $(document).ready(function() {
 
         console.log("changingggggggsedse");
         $("#reportDetail").empty();
+        $("#csvLink").empty();
         let blockId = $('#block option:selected').val();
         if (blockId !== '0') {
             let urlDetail = '/report/blockreport/detail/' + blockId;;
             let linkCSV = 'http://localhost:8082/api/user/export-block/' + blockId;
+            let downloadButton = '<button><a href="'+ linkCSV +'">Download CSV</a></button>';
+            $("#csvLink").append(downloadButton);
+            $("#reportDetail").load(urlDetail);
+        }
+    });
+
+    $("#selectEntryBlock").change(function () {
+
+        console.log("changingggggggsedse");
+        $("#reportDetail").empty();
+        $("#csvLink").empty();
+        let blockId = $('#block option:selected').val();
+        if (blockId !== '0') {
+            let urlDetail = '/report/entryreport/detail/' + blockId;;
+            let linkCSV = 'http://localhost:8082/api/user/export-entry/' + blockId;
             let downloadButton = '<button><a href="'+ linkCSV +'">Download CSV</a></button>';
             $("#csvLink").append(downloadButton);
             $("#reportDetail").load(urlDetail);

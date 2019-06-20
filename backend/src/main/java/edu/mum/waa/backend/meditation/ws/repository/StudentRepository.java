@@ -22,12 +22,12 @@ public interface StudentRepository extends JpaRepository<Student,Integer> {
 //    @Query(value = "Select s from Student s where s.studentId like :userId")
     @Query("SELECT s FROM Student s where s.studentId like %:keyword%")
     public List<Student> search(@Param("keyword") String keyword);
-
-    public List<Student> findStudentsByEntry(String entry);
+    @Query(value = "Select s from Student s where upper(s.entry) = :entryStr")
+    public List<Student> findStudentsByEntry(String entryStr);
 
     @Query(value = "Select b.students from Block b where  b.blockId = :blockId")
     public List<Student> findStudentsByBlockId(Long blockId);
 
-    @Query(value = "Select distinct s.entry from Student s")
+    @Query(value = "Select distinct upper(s.entry) from Student s")
     public List<String> getEntryList();
 }

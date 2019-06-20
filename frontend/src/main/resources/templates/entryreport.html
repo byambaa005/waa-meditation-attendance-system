@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Attendance Info</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/sb-admin.css}"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+    <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/sb-admin.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+</head>
+<body>
+<nav th:replace="~{fragments/header :: header}">Header</nav>
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul th:replace="~{fragments/sidebar :: sidebar}">Sidebar</ul>
+
+    <div id="content-wrapper">
+        <div class="container-fluid">
+            <h2>BlockReport info</h2>
+
+
+            <h2>Attendance Block Detail</h2>
+            <span id="selectEntryBlock">
+                <label>Block: </label>
+                <select id="block">
+                    <option value="0">-- Select Entry --</option>
+                    <option th:each="entry : ${entries}" th:value="${entry}"
+                            th:text="${entry}"></option>
+                </select>
+            </span>
+            <br>
+            <div id="csvLink"></div>
+            <br>
+            <div id="reportDetail">
+            </div>
+        </div>
+
+        <!-- Sticky Footer -->
+        <div th:replace="~{fragments/footer:: footer}">Footer</div>
+    </div>
+</div>
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+
+</body>
+</html>

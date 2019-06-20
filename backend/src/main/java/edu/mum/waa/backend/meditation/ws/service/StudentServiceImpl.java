@@ -112,7 +112,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> getStudentsByEntry(String entry) {
-        return studentRepository.findStudentsByEntry(entry);
+        return studentRepository.findStudentsByEntry(entry.toUpperCase());
 
     }
 

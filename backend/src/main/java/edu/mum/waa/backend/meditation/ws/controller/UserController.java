@@ -85,7 +85,7 @@ public class UserController {
     @GetMapping("/user/attendance-entry")
     public List<EntryReport> facultyReportEntry(@RequestParam(name="entry") String entry){
 
-        return userService.generateReportByEntry(entry);
+        return userService.generateReportByEntry(entry.toUpperCase());
 
     }
     @GetMapping("/user/attendance-block-summary")
