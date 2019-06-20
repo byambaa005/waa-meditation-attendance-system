@@ -80,7 +80,7 @@ public class LoginController {
             //Saving signed in USER info to session
             session.setAttribute("curUser", userInfoResponse);
 
-             if (userInfoResponse.getRoles().contains("USER_ADMIN") || userInfoResponse.getRoles().contains("USER_FACULTY")) {
+             if (userInfoResponse.getRoles().contains("ROLE_ADMIN") || userInfoResponse.getRoles().contains("ROLE_FACULTY")) {
                 System.out.println("ADMIN OR FACULTY");
             } else {
                  System.out.println("USER LOGGED IN");
