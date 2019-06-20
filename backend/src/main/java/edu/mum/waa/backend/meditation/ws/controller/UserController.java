@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
@@ -87,7 +88,13 @@ public class UserController {
         return userService.generateReportByEntry(entry);
 
     }
+    @GetMapping("/user/attendance-block-summary")
+    public BlockSummaryReport facultyReportSummaryBlock(@RequestParam(name="blockId") Long blockId){
+        BlockSummaryReport blockSummaryReport = new BlockSummaryReport();
+        blockSummaryReport.setAttendanceList(userService.generateReportEntryByBlock(blockId));
+        return blockSummaryReport;
 
+    }
     @GetMapping("/user/export-block")
     public void exportBlockCSV(HttpServletResponse response,@RequestParam(name = "blockId")Long blockId) throws Exception{
 

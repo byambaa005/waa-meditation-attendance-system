@@ -51,7 +51,16 @@ $(document).ready(function() {
             $("#studentDetail").load(urlDetail);
         }
     });
+    $("#selectReportBlock").change(function () {
 
+        console.log("changingggggggsedse");
+        $("#reportDetail").empty();
+        let blockId = $('#block option:selected').val();
+        if (blockId !== '0') {
+            let urlDetail = '/report/blockreport/detail/' + blockId;;
+            $("#reportDetail").load(urlDetail);
+        }
+    });
 });
 
 function fire_ajax_submit() {
