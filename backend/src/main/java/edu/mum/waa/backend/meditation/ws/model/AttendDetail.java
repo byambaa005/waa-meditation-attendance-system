@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AttendDetail {
     String date;
-    boolean isAttended;
+    Boolean attended;
 }

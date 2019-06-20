@@ -94,7 +94,7 @@ public class StudentServiceImpl implements StudentService {
 
         Integer requiredCount = block.getTotalDate();
         for(AttendDetail ad:attendDetails){
-            if(ad.isAttended()){
+            if(ad.getAttended()){
                 attendanceCount++;
             }
         }
