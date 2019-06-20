@@ -39,7 +39,18 @@ $(document).ready(function() {
 
             }
         });
-    })
+    });
+
+    $("#selectBlock").change(function () {
+
+        console.log("changinggggggg");
+        $("#studentDetail").empty();
+        let blockId = $('#block option:selected').val();
+        if (blockId !== '0') {
+            let urlDetail = '/student/attendance/block';
+            $("#studentDetail").load(urlDetail);
+        }
+    });
 
 });
 

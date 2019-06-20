@@ -1,9 +1,6 @@
 package edu.mum.waa.meditation.gui.controller;
 
-import edu.mum.waa.meditation.gui.model.StudentAttendanceResponse;
-import edu.mum.waa.meditation.gui.model.TmAttendance;
-import edu.mum.waa.meditation.gui.model.TmCheckResponse;
-import edu.mum.waa.meditation.gui.model.UserSummary;
+import edu.mum.waa.meditation.gui.model.*;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.PagedResources;
 import org.springframework.http.*;
@@ -15,11 +12,12 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
 import java.util.Collection;
-import java.util.List;
 
 @Controller
 @RequestMapping(value = "/student")
 public class StudentController {
+
+    private static String BLOCKS_URL = "http://localhost:8082/crud/blocks";
 
     @GetMapping("/attendance")
     public String getStudentAttendance(Model model, HttpSession session) {
@@ -27,10 +25,6 @@ public class StudentController {
         if (session.getAttribute("curUser") == null) {
             return "redirect:/login";
         }
-
-        UserSummary curUser = (UserSummary) session.getAttribute("curUser");
-
-        System.out.println(curUser);
 
         RestTemplate restTemplate = new RestTemplate();
         String studentAttendanceUrl = "http://localhost:8082/student/attendance-overall?studentId=986979";
@@ -43,21 +37,53 @@ public class StudentController {
 //            studentAttendanceUrl += "?studentId=986979";
 //        }
 
+
+        //Create headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        System.out.println(session.getAttribute("access_token"));
         headers.add("Authorization", "Bearer " + session.getAttribute("access_token"));
 
+        //Get blocks list
+        ResponseEntity<PagedResources<Block>> blocksResponse = restTemplate.exchange(BLOCKS_URL,
+                HttpMethod.GET, new HttpEntity<>("parameters", headers), new ParameterizedTypeReference<PagedResources<Block>>() {
+                });
+        PagedResources<Block> Block = blocksResponse.getBody();
+        Collection<Block> blocks = Block.getContent();
+
+        //Get student attendance info
         ResponseEntity<StudentAttendanceResponse> response = restTemplate.exchange(studentAttendanceUrl,
                 HttpMethod.GET, new HttpEntity<>("parameters", headers), new ParameterizedTypeReference<StudentAttendanceResponse>() {});
         StudentAttendanceResponse studentAttendanceResponses = response.getBody();
-//        List<TmAttendance> attendances = studentAttendanceResponses.getAttendanceList();
 
+        //Add block and attendance info to model
         model.addAttribute("attendanceInfo", studentAttendanceResponses);
+        model.addAttribute("blocks", blocks);
 
         System.out.println(response);
 
         return "student";
+    }
+
+    @GetMapping("/attendance/block")
+    public String getAttendance(Model model, HttpSession session) {
+        if (session.getAttribute("curUser") == null) {
+            return "redirect:/login";
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("Authorization", "Bearer " + session.getAttribute("access_token"));
+
+        RestTemplate restTemplate = new RestTemplate();
+        String studentAttendanceByBlockUrl = "http://localhost:8082/student/attendance-block?studentId=986979&blockId=100";
+
+        ResponseEntity<StudentAttendanceResponse> blockResponse = restTemplate.exchange(studentAttendanceByBlockUrl,
+                HttpMethod.GET, new HttpEntity<>("parameters", headers), new ParameterizedTypeReference<StudentAttendanceResponse>() {});
+        StudentAttendanceResponse studentAttendanceByBlockResponses = blockResponse.getBody();
+
+        model.addAttribute("attendanceInfoByBlock", studentAttendanceByBlockResponses);
+
+        return "student-attendance-block";
     }
 
 }
