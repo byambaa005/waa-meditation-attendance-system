@@ -1,5 +1,6 @@
 package edu.mum.waa.backend.meditation.ws.repository;
 
+import edu.mum.waa.backend.meditation.ws.entity.Block;
 import edu.mum.waa.backend.meditation.ws.entity.Student;
 import edu.mum.waa.backend.meditation.ws.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,5 +23,9 @@ public interface StudentRepository extends JpaRepository<Student,Integer> {
     @Query("SELECT s FROM Student s where s.studentId like %:keyword%")
     public List<Student> search(@Param("keyword") String keyword);
 
+    public List<Student> findStudentsByEntry(String entry);
+
+    @Query(value = "Select b.students from Block b where  b.blockId = :blockId")
+    public List<Student> findStudentsByBlockId(Long blockId);
 
 }

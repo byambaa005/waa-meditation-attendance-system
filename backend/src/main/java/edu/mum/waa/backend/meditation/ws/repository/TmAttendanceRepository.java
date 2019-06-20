@@ -4,7 +4,6 @@ import edu.mum.waa.backend.meditation.ws.entity.TmAttendance;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -29,6 +28,8 @@ public interface TmAttendanceRepository extends JpaRepository<TmAttendance, Long
     @Query(value = "select a from TmAttendance a where a.studentId in (select s.studentId from Students s where entry =:entry)")
     public List<TmAttendance> findTmAttendancesByEntry(String entry);
 */
+    public Long countDistinctByStudentId(Integer studentId);
+
     @Query("Select count (a) from TmAttendance a where a.studentId = :studentId  and a.date= :date  and a.type = :type")
     Integer getAttendedRecord(@Param("studentId") Integer studentId,
                               @Param("date") LocalDate date, @Param("type") String type);

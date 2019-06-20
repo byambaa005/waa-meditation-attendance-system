@@ -1,5 +1,8 @@
 package edu.mum.waa.backend.meditation.ws.controller;
 
+import com.opencsv.CSVWriter;
+import com.opencsv.bean.StatefulBeanToCsv;
+import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import edu.mum.waa.backend.meditation.ws.entity.Block;
 import edu.mum.waa.backend.meditation.ws.entity.TmAttendance;
 import edu.mum.waa.backend.meditation.ws.entity.User;
@@ -10,15 +13,19 @@ import edu.mum.waa.backend.meditation.ws.repository.TmAttendanceRepository;
 import edu.mum.waa.backend.meditation.ws.repository.UserRepository;
 import edu.mum.waa.backend.meditation.ws.security.CurrentUser;
 import edu.mum.waa.backend.meditation.ws.security.UserPrincipal;
+import edu.mum.waa.backend.meditation.ws.service.StudentService;
 import edu.mum.waa.backend.meditation.ws.service.UserService;
 import edu.mum.waa.backend.meditation.ws.utils.Common;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,6 +38,8 @@ public class UserController {
     private UserRepository userRepository;
     @Autowired
     private UserService userService;
+    @Autowired
+    private StudentService studentService;
 
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -76,6 +85,53 @@ public class UserController {
     public List<EntryReport> facultyReportEntry(@RequestParam(name="entry") String entry){
 
         return userService.generateReportByEntry(entry);
+
+    }
+
+    @GetMapping("/user/export-block")
+    public void exportBlockCSV(HttpServletResponse response,@RequestParam(name = "blockId")Long blockId) throws Exception{
+
+        String filename = "Attendance.csv";
+
+        response.setContentType("text/csv");
+        response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
+                "attachment; filename=\"" + filename + "\"");
+
+        //create a csv writer
+        StatefulBeanToCsv<EntryReport> writer = new StatefulBeanToCsvBuilder<EntryReport>(response.getWriter())
+                .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
+                .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
+                .withOrderedResults(false)
+                .build();
+
+        List<EntryReport> reportList = userService.generateReportEntryByBlock(blockId);
+
+        //write all users to csv file
+        writer.write(reportList);
+
+    }
+
+    @GetMapping("/user/export-entry")
+    public void exportEntryCSV(HttpServletResponse response,@RequestParam(name = "entry")String entry) throws Exception{
+
+        String filename = "EntryExport-"+ LocalDate.now().toString()+".csv";
+
+        response.setContentType("text/csv");
+        response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
+                "attachment; filename=\"" + filename + "\"");
+
+        //create a csv writer
+        StatefulBeanToCsv<EntryReport> writer = new StatefulBeanToCsvBuilder<EntryReport>(response.getWriter())
+                .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
+                .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
+                .withOrderedResults(false)
+                .build();
+
+        List<EntryReport> reportList = userService.generateReportByEntry(entry);
+        System.out.println("Size entry : "+reportList.size());
+
+        //write all users to csv file
+        writer.write(reportList);
 
     }
 }
