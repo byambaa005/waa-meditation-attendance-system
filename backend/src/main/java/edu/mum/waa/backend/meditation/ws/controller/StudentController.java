@@ -4,6 +4,7 @@ import edu.mum.waa.backend.meditation.ws.entity.Block;
 import edu.mum.waa.backend.meditation.ws.entity.Student;
 import edu.mum.waa.backend.meditation.ws.entity.TmAttendance;
 import edu.mum.waa.backend.meditation.ws.model.AttendDetail;
+import edu.mum.waa.backend.meditation.ws.model.AttendDetailReport;
 import edu.mum.waa.backend.meditation.ws.model.AttendanceReport;
 import edu.mum.waa.backend.meditation.ws.repository.BlockRepository;
 import edu.mum.waa.backend.meditation.ws.repository.StudentRepository;
@@ -51,7 +52,7 @@ public class StudentController {
         return studentService.generateReportByStudentId(studentId);
     }
     @GetMapping("/attendance-detail")
-    public List<AttendDetail> getAttendanceDetail(@RequestParam(name="studentId") Integer studentId,@RequestParam("blockId") Long blockId){
+    public AttendDetailReport getAttendanceDetail(@RequestParam(name="studentId") Integer studentId, @RequestParam("blockId") Long blockId){
 
         return studentService.getAttandDetail(blockId,studentId);
     }

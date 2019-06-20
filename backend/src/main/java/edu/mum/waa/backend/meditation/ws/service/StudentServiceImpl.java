@@ -4,6 +4,7 @@ import edu.mum.waa.backend.meditation.ws.entity.Block;
 import edu.mum.waa.backend.meditation.ws.entity.Student;
 import edu.mum.waa.backend.meditation.ws.entity.TmAttendance;
 import edu.mum.waa.backend.meditation.ws.model.AttendDetail;
+import edu.mum.waa.backend.meditation.ws.model.AttendDetailReport;
 import edu.mum.waa.backend.meditation.ws.model.AttendanceReport;
 import edu.mum.waa.backend.meditation.ws.repository.BlockRepository;
 import edu.mum.waa.backend.meditation.ws.repository.StudentRepository;
@@ -78,7 +79,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<AttendDetail> getAttandDetail(Long blockId, Integer studentId) {
+    public AttendDetailReport getAttandDetail(Long blockId, Integer studentId) {
         Block block = blockRepository.getOne(blockId);
         Student student = studentRepository.getOne(studentId);
         List<LocalDate> localDates = Common.getAllDateOfBlock(block);
@@ -89,7 +90,18 @@ public class StudentServiceImpl implements StudentService {
             attendDetail.setAttended(tmAttendanceRepository.getAttendedRecord(studentId, localDate, "AM") == 1);
             attendDetails.add(attendDetail);
         });
-        return attendDetails;
+        Integer attendanceCount = attendDetails.size();
+        Integer requiredCount = block.getTotalDate();
+        Double percentage = Common.calcAttendancePercentage(attendanceCount,requiredCount);
+        AttendDetailReport attendanceReport = new AttendDetailReport();
+
+        attendanceReport.setAttendanceList(attendDetails);
+        attendanceReport.setAttendence(attendanceCount);
+        attendanceReport.setRequiredAttendance(requiredCount);
+        attendanceReport.setPercentage(percentage);
+        attendanceReport.setExtraPoint(Common.calcExtraPoint(percentage));
+
+        return attendanceReport;
     }
 
 
