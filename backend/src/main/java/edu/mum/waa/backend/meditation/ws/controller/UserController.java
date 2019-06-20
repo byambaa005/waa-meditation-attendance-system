@@ -95,8 +95,8 @@ public class UserController {
         return blockSummaryReport;
 
     }
-    @GetMapping("/user/export-block")
-    public void exportBlockCSV(HttpServletResponse response,@RequestParam(name = "blockId")Long blockId) throws Exception{
+    @GetMapping("/user/export-block/{blockId}")
+    public void exportBlockCSV(HttpServletResponse response,@PathVariable(name = "blockId")Long blockId) throws Exception{
 
         String filename = "BlockReport-"+ LocalDate.now().toString()+".csv";
 
@@ -118,8 +118,8 @@ public class UserController {
 
     }
 
-    @GetMapping("/user/export-entry")
-    public void exportEntryCSV(HttpServletResponse response,@RequestParam(name = "entry")String entry) throws Exception{
+    @GetMapping("/user/export-entry/{entry}")
+    public void exportEntryCSV(HttpServletResponse response,@PathVariable(name = "entry")String entry) throws Exception{
 
         String filename = "EntryReport-"+ LocalDate.now().toString()+".csv";
 

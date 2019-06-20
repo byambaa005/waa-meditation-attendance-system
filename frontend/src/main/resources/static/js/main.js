@@ -58,6 +58,9 @@ $(document).ready(function() {
         let blockId = $('#block option:selected').val();
         if (blockId !== '0') {
             let urlDetail = '/report/blockreport/detail/' + blockId;;
+            let linkCSV = 'http://localhost:8082/api/user/export-block/' + blockId;
+            let downloadButton = '<button><a href="'+ linkCSV +'">Download CSV</a></button>';
+            $("#csvLink").append(downloadButton);
             $("#reportDetail").load(urlDetail);
         }
     });
