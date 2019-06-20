@@ -106,19 +106,16 @@ public class UserController {
 
         AttendanceReport attendanceReport = new AttendanceReport();
 
-        /*
         List<TmAttendance> attendanceList = new ArrayList<TmAttendance>();
 
-        Block block = new Block();
-        block = blockRepository.findById(blockId).get();
+        //attendanceList = tmAttendanceRepository.findTmAttendancesByEntry(entry);
 
-        attendanceList = tmAttendanceRepository.findTmAttendancesByDateBetween(block.getStartDate(),block.getEndDate());
-
-
+    /*
         Integer attendanceCount = attendanceList.size();
         Integer requiredCount = block.getTotalDate();
         Integer numOfStudents = tmAttendanceRepository.findDistinctByStudentIdAndDateIsBetween(block.getStartDate(),block.getEndDate()).intValue();
         requiredCount = requiredCount*numOfStudents;
+        // one block
         Double percentage = Common.calcAttendancePercentage(attendanceCount,requiredCount);
 
         //AttendanceReport for Faculty per block

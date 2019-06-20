@@ -24,4 +24,9 @@ public interface TmAttendanceRepository extends JpaRepository<TmAttendance, Long
     @Query(value="SELECT COUNT(DISTINCT a.studentId)  FROM TmAttendance a WHERE a.date BETWEEN :startDate AND :endDate")
     public Long findDistinctByStudentIdAndDateIsBetween(LocalDate startDate, LocalDate endDate);
 
+    /*
+    @Query(value = "select a from TmAttendance a where a.studentId in (select s.studentId from Students s where entry =:entry)")
+    public List<TmAttendance> findTmAttendancesByEntry(String entry);
+*/
+
 }

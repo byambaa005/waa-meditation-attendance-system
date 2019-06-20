@@ -1,6 +1,9 @@
 package edu.mum.waa.backend.meditation.ws.service;
+import edu.mum.waa.backend.meditation.ws.entity.Student;
 import edu.mum.waa.backend.meditation.ws.entity.TmAttendance;
+import edu.mum.waa.backend.meditation.ws.repository.StudentRepository;
 import edu.mum.waa.backend.meditation.ws.repository.TmAttendanceRepository;
+import edu.mum.waa.backend.meditation.ws.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +20,8 @@ public class FileUploadService {
 
     @Autowired
     TmAttendanceRepository attendanceRepository;
+    @Autowired
+    StudentRepository studentRepository;
 
     public boolean processFile(MultipartFile file){
 
@@ -36,11 +41,20 @@ public class FileUploadService {
 
             //temporary fields
             LocalDate date;
-            Integer studentId;
+            Integer studentId=null;
             Long cardId;
             String type;
             String location;
             String name;
+
+            //for all user and attendance
+            List<Integer> studentIdList = new ArrayList<>();
+            List<TmAttendance> tmAttendanceList = new ArrayList<>();
+            List<Student> studentList = studentRepository.findAll();
+                    for(Student student: studentList){
+                        studentIdList.add(student.getStudentId());
+                        }
+            tmAttendanceList = attendanceRepository.findAll();
 
             DateTimeFormatter formatterWithFullYear = DateTimeFormatter.ofPattern("MM/dd/yyyy");
             DateTimeFormatter formatterWithYear= DateTimeFormatter.ofPattern("MM/dd/yy");
@@ -70,6 +84,11 @@ public class FileUploadService {
                     attendanceRecord = new TmAttendance(cardId,studentId,date,type,location);
                 }
                 //add attendance record to list
+
+                if (attendanceRecord != null
+                        && !studentIdList.contains(studentId)
+                        && !attendanceList.contains(attendanceRecord)
+                        && !tmAttendanceList.contains(attendanceRecord))
                 attendanceList.add(attendanceRecord);
 
             }

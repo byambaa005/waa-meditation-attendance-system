@@ -3,6 +3,7 @@ package edu.mum.waa.backend.meditation.ws.entity;
 import edu.mum.waa.backend.meditation.ws.entity.audit.IdDateAudit;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLInsert;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,7 +13,8 @@ import java.time.LocalDate;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name="TmAttendance", uniqueConstraints = {@UniqueConstraint(columnNames ={"Student_Id","Card_Id","Date","Type"})})
+@Table(name="TmAttendance", uniqueConstraints = @UniqueConstraint(columnNames ={"Student_Id","Card_Id","Date","Type"}))
+//@SQLInsert(sql="Insert ignore into Tm_Attendance(student_id,card_id,date,type,location,name) values (?,?,?,?,?,?)")
 public class TmAttendance extends IdDateAudit{
 
     @Id
@@ -73,4 +75,18 @@ public class TmAttendance extends IdDateAudit{
     public long getId(){
         return this.sid;
     }
+    @Override
+    public boolean equals(Object obj) {
+        TmAttendance attendanceEntity = (TmAttendance) obj;
+        if (attendanceEntity == null) return false;
+        Integer id = this.studentId == null ? 0 : this.studentId;
+        Long card = this.cardId == null ? 0L : this.cardId;
+        Integer id1 = attendanceEntity.studentId == null ? 0 : attendanceEntity.studentId;
+        Long card1 = attendanceEntity.cardId == null ? 0L : attendanceEntity.cardId;
+        return  id.equals(id1)
+                && card.equals(card1)
+                && this.date.equals(attendanceEntity.date)
+                && this.type.equals(attendanceEntity.type);
+    }
+
 }
