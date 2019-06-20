@@ -37,17 +37,12 @@ public class AdminController {
                 HttpHeaders headers = new HttpHeaders();
 
                 headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-//                headers.set("Authorization", "Bearer "+);
+
                 MultiValueMap<String, Object> body
                         = new LinkedMultiValueMap<>();
-//                body.add("file", file);
                 body.add("file", new ByteArrayResource(file.getBytes()));
 
                 HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<MultiValueMap<String, Object>>(body, headers);
-                System.out.println(entity);
-
-//                ResponseEntity<String> response = restTemplate
-//                        .postForEntity(uri, requestEntity, String.class);
 
                 ResponseEntity<String> result = restTemplate.exchange(
                         uri, HttpMethod.POST, entity,
