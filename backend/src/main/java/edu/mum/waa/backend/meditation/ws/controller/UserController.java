@@ -91,7 +91,7 @@ public class UserController {
     @GetMapping("/user/export-block")
     public void exportBlockCSV(HttpServletResponse response,@RequestParam(name = "blockId")Long blockId) throws Exception{
 
-        String filename = "Attendance.csv";
+        String filename = "BlockReport-"+ LocalDate.now().toString()+".csv";
 
         response.setContentType("text/csv");
         response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
@@ -114,7 +114,7 @@ public class UserController {
     @GetMapping("/user/export-entry")
     public void exportEntryCSV(HttpServletResponse response,@RequestParam(name = "entry")String entry) throws Exception{
 
-        String filename = "EntryExport-"+ LocalDate.now().toString()+".csv";
+        String filename = "EntryReport-"+ LocalDate.now().toString()+".csv";
 
         response.setContentType("text/csv");
         response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
