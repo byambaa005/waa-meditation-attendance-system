@@ -14,6 +14,7 @@
     <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/js/sb-admin.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
 </head>
@@ -44,6 +45,9 @@
                             th:text="${block.getCourse() + ' - ' + block.getName()}"></option>
                 </select>
             </span>
+
+            <div id="studentDetail">
+            </div>
         </div>
 
         <!-- Sticky Footer -->
