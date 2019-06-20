@@ -7,6 +7,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
@@ -27,16 +28,8 @@ public class StudentController {
         }
 
         RestTemplate restTemplate = new RestTemplate();
-        String studentAttendanceUrl = "http://localhost:8082/student/attendance-overall?studentId=986979";
-
-//        if (curUser.getRoles().contains("USER_ADMIN") || curUser.getRoles().contains("USER_FACULTY")) {
-//            studentAttendanceUrl += "";
-//            System.out.println("ADMIN OR FACULTY");
-//        } else {
-//            System.out.println("USER STUDENT");
-//            studentAttendanceUrl += "?studentId=986979";
-//        }
-
+        Object studentId = session.getAttribute("studentId");
+        String studentAttendanceUrl = "http://localhost:8082/student/attendance-overall?studentId=" + studentId;
 
         //Create headers
         HttpHeaders headers = new HttpHeaders();
@@ -64,24 +57,27 @@ public class StudentController {
         return "student";
     }
 
-    @GetMapping("/attendance/block")
-    public String getAttendance(Model model, HttpSession session) {
+    @GetMapping("/attendance/block/{blockId}")
+    public String getAttendance(Model model, HttpSession session, @PathVariable("blockId") long blockId) {
         if (session.getAttribute("curUser") == null) {
             return "redirect:/login";
         }
+
+        Object studentId = session.getAttribute("studentId");
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add("Authorization", "Bearer " + session.getAttribute("access_token"));
 
         RestTemplate restTemplate = new RestTemplate();
-        String studentAttendanceByBlockUrl = "http://localhost:8082/student/attendance-block?studentId=986979&blockId=100";
+        String studentAttendanceByBlockUrl = "http://localhost:8082/student/attendance-detail?studentId=" + studentId + "&blockId=" + blockId;
 
-        ResponseEntity<StudentAttendanceResponse> blockResponse = restTemplate.exchange(studentAttendanceByBlockUrl,
-                HttpMethod.GET, new HttpEntity<>("parameters", headers), new ParameterizedTypeReference<StudentAttendanceResponse>() {});
-        StudentAttendanceResponse studentAttendanceByBlockResponses = blockResponse.getBody();
+        ResponseEntity<AttendDetailReport> blockResponse = restTemplate.exchange(studentAttendanceByBlockUrl,
+                HttpMethod.GET, new HttpEntity<>("parameters", headers), new ParameterizedTypeReference<AttendDetailReport>() {});
+        AttendDetailReport studentAttendanceByBlockResponses = blockResponse.getBody();
 
         model.addAttribute("attendanceInfoByBlock", studentAttendanceByBlockResponses);
+        System.out.println(blockResponse);
 
         return "student-attendance-block";
     }

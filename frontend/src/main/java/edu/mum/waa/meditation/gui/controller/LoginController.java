@@ -1,8 +1,6 @@
 package edu.mum.waa.meditation.gui.controller;
 
-import edu.mum.waa.meditation.gui.model.JwtAuthenticationResponse;
-import edu.mum.waa.meditation.gui.model.LoginRequest;
-import edu.mum.waa.meditation.gui.model.UserSummary;
+import edu.mum.waa.meditation.gui.model.*;
 import org.json.JSONObject;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
@@ -72,14 +70,29 @@ public class LoginController {
 
             headers.add("Authorization", "Bearer " + response.getBody().getAccessToken());
 
-            //Saving signed in USER info to session
+            //Getting signed in USER info to session
             String userInfoUrl = "http://localhost:8082/api/user/me";
 
             ResponseEntity<UserSummary> userResponse = restTemplate.exchange(userInfoUrl,
                     HttpMethod.GET, new HttpEntity<>("parameters", headers), new ParameterizedTypeReference<UserSummary>() {});
             UserSummary userInfoResponse = userResponse.getBody();
 
+            //Saving signed in USER info to session
             session.setAttribute("curUser", userInfoResponse);
+
+             if (userInfoResponse.getRoles().contains("USER_ADMIN") || userInfoResponse.getRoles().contains("USER_FACULTY")) {
+                System.out.println("ADMIN OR FACULTY");
+            } else {
+                 System.out.println("USER LOGGED IN");
+                 String studentInfoUrl = "http://localhost:8082/student/getByUserId?userId=" + userInfoResponse.getId();
+                 //Get student attendance info
+                 ResponseEntity<Student> studentIdResponse = restTemplate.exchange(studentInfoUrl,
+                         HttpMethod.GET, new HttpEntity<>("parameters", headers), new ParameterizedTypeReference<Student>() {});
+                 Student studentInfoResponse = studentIdResponse.getBody();
+
+                 //If signed USER is a student, save studentId to session
+                 session.setAttribute("studentId", studentInfoResponse.getStudentId());
+            }
 
             return "redirect:/";
         }

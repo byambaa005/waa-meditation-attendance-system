@@ -35,7 +35,7 @@
         <tbody>
         <tr th:each="attend : ${attendanceInfoByBlock.getAttendanceList()}">
             <td class="align-middle"><span th:text="${attend.getDate()}"></span></td>
-            <td class="align-middle"><span>true</span></td>
+            <td class="align-middle"><span th:text="${attend.getAttended()}"></span></td>
         </tr>
         </tbody>
     </table>

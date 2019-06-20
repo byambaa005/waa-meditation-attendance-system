@@ -47,7 +47,7 @@ $(document).ready(function() {
         $("#studentDetail").empty();
         let blockId = $('#block option:selected').val();
         if (blockId !== '0') {
-            let urlDetail = '/student/attendance/block';
+            let urlDetail = '/student/attendance/block/' + blockId;
             $("#studentDetail").load(urlDetail);
         }
     });
