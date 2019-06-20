@@ -8,5 +8,6 @@ import java.util.List;
 public interface UserService {
     public AttendanceReport generateReportByBlockId(Long blockId);
     public List<EntryReport> generateReportByEntry(String entry);
+    public List<EntryReport> generateReportEntryByBlock(Long blockId);
 
 }

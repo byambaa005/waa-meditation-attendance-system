@@ -35,37 +35,4 @@ public class FileUploadController {
         }
     }
 
-    @GetMapping("/export-attendance")
-    public void exportCSV(HttpServletResponse response) throws Exception{
-        /*
-
-            String filename = "Attendance.csv";
-
-        response.setContentType("text/csv");
-        response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
-                "attachment; filename=\"" + filename + "\"");
-
-        //create a csv writer
-        StatefulBeanToCsv<TmAttendance> writer = new StatefulBeanToCsvBuilder<TmAttendance>(response.getWriter())
-                .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
-                .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
-                .withOrderedResults(false)
-                .build();
-
-        for(int i=1;i<100;i++){
-            TmAttendance temp = new TmAttendance();
-            temp.setId(i);
-            temp.setCardId((long) 1000000+i);
-            temp.setStudentId(986979+i);
-            temp.setName(null);
-            temp.setType("AM");
-            temp.setDate(LocalDate.now());
-            temp.setLocation("DB");
-            attendanceList.add(temp);
-        }
-
-        //write all users to csv file
-        writer.write(attendanceList);
-*/
-    }
 }

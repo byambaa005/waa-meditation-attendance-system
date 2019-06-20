@@ -1,5 +1,6 @@
 package edu.mum.waa.backend.meditation.ws.service;
 
+import edu.mum.waa.backend.meditation.ws.entity.Student;
 import edu.mum.waa.backend.meditation.ws.entity.TmAttendance;
 import edu.mum.waa.backend.meditation.ws.model.AttendDetail;
 import edu.mum.waa.backend.meditation.ws.model.AttendDetailReport;
@@ -16,5 +17,6 @@ public interface StudentService {
 
     public AttendanceReport generateReportByStudentId(Integer studentId);
     public AttendanceReport generateReportByBlockId(Long blockId,Integer studentId);
+    public List<Student> getStudentsByEntry(String entry);
     public AttendDetailReport getAttandDetail(Long blockId, Integer studentId);
 }
