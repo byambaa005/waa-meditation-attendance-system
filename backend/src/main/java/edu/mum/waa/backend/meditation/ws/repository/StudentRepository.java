@@ -28,4 +28,6 @@ public interface StudentRepository extends JpaRepository<Student,Integer> {
     @Query(value = "Select b.students from Block b where  b.blockId = :blockId")
     public List<Student> findStudentsByBlockId(Long blockId);
 
+    @Query(value = "Select distinct s.entry from Student s")
+    public List<String> getEntryList();
 }

@@ -38,7 +38,10 @@ public class StudentController {
     public Student getByUserId(@RequestParam(name="userId") Long userId){
         return studentRepository.findUserByStudentId(userId);
     }
-
+    @GetMapping("/getEntries")
+    public List<String>  getEntries(){
+        return studentRepository.getEntryList();
+    }
     @GetMapping("/attendance-block")
     public AttendanceReport generateReportByBlock(@RequestParam(name="studentId") Integer studentId,@RequestParam(name = "blockId") Long blockId){
 
