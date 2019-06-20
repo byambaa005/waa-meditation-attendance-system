@@ -84,14 +84,20 @@ public class StudentServiceImpl implements StudentService {
         Student student = studentRepository.getOne(studentId);
         List<LocalDate> localDates = Common.getAllDateOfBlock(block);
         List<AttendDetail> attendDetails = new ArrayList<>();
+        int attendanceCount = 0;
         localDates.forEach(localDate -> {
             AttendDetail attendDetail = new AttendDetail();
             attendDetail.setDate(localDate.toString());
             attendDetail.setAttended(tmAttendanceRepository.getAttendedRecord(studentId, localDate, "AM") == 1);
             attendDetails.add(attendDetail);
         });
-        Integer attendanceCount = attendDetails.size();
+
         Integer requiredCount = block.getTotalDate();
+        for(AttendDetail ad:attendDetails){
+            if(ad.isAttended()){
+                attendanceCount++;
+            }
+        }
         Double percentage = Common.calcAttendancePercentage(attendanceCount,requiredCount);
         AttendDetailReport attendanceReport = new AttendDetailReport();
 
