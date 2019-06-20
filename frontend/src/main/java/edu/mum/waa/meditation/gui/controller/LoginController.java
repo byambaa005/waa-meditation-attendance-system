@@ -1,10 +1,7 @@
 package edu.mum.waa.meditation.gui.controller;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.interfaces.DecodedJWT;
 import edu.mum.waa.meditation.gui.model.JwtAuthenticationResponse;
 import edu.mum.waa.meditation.gui.model.LoginRequest;
-import edu.mum.waa.meditation.gui.model.TmCheckResponse;
 import edu.mum.waa.meditation.gui.model.UserSummary;
 import org.json.JSONObject;
 import org.springframework.core.ParameterizedTypeReference;
@@ -15,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
