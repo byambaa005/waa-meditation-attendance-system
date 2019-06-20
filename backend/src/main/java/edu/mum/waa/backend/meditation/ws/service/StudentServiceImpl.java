@@ -88,13 +88,13 @@ public class StudentServiceImpl implements StudentService {
         localDates.forEach(localDate -> {
             AttendDetail attendDetail = new AttendDetail();
             attendDetail.setDate(localDate.toString());
-            attendDetail.setAttended(tmAttendanceRepository.getAttendedRecord(studentId, localDate, "AM") == 1);
+            attendDetail.setAttended(tmAttendanceRepository.getAttendedRecord(studentId, localDate, "AM") == 1?"true":"false");
             attendDetails.add(attendDetail);
         });
 
         Integer requiredCount = block.getTotalDate();
         for(AttendDetail ad:attendDetails){
-            if(ad.getAttended()){
+            if("true".equals(ad.getAttended())){
                 attendanceCount++;
             }
         }
