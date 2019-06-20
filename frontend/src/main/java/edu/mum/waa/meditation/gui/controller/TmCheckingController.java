@@ -4,6 +4,7 @@ import com.sun.net.httpserver.Headers;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import edu.mum.waa.meditation.gui.model.JwtAuthenticationResponse;
 import edu.mum.waa.meditation.gui.model.Student;
+import edu.mum.waa.meditation.gui.model.TmCheckNew;
 import edu.mum.waa.meditation.gui.model.TmCheckResponse;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,19 +60,19 @@ public class TmCheckingController {
     }
 
     @GetMapping("/gui/add")
-    public String getAddForm(@ModelAttribute("tmcheck") TmCheckResponse tmCheckResponse, BindingResult bindingResult, Model model) {
+    public String getAddForm(@ModelAttribute("tmcheck") TmCheckNew tmCheckResponse, BindingResult bindingResult, Model model) {
         return "tmcheckform";
     }
 
     @PostMapping("/add")
-    public String saveTmCheck(@Valid @ModelAttribute("tmcheck") TmCheckResponse tmCheckResponse, BindingResult bindingResult, HttpSession session, Model model) {
+    public String saveTmCheck(@Valid @ModelAttribute("tmcheck") TmCheckNew tmCheckResponse, BindingResult bindingResult, HttpSession session, Model model) {
         if (bindingResult.hasErrors()) {
             return "tmcheckform";
         } else {
 
             RestTemplate restTemplate = new RestTemplate();
             System.out.println(tmCheckResponse.toString());
-            HttpEntity<TmCheckResponse> entity = new HttpEntity<>(tmCheckResponse, buildHeaders());
+            HttpEntity<TmCheckNew> entity = new HttpEntity<>(tmCheckResponse, buildHeaders());
             System.out.println(tmCheckResponse.toString());
             ResponseEntity<String> result = restTemplate.postForEntity(
                     BACKEND_URI,entity, String.class);

@@ -20,7 +20,6 @@ public class TmCheck extends UserDateAudit {
 
 
     @Id
-    @Null
     @GeneratedValue(strategy = GenerationType.AUTO)
     private  long id;
     @PastOrPresent(message="Tm check date must be current or past")

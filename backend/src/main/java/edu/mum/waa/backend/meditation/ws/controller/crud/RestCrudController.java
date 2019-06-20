@@ -65,7 +65,6 @@ public abstract class RestCrudController< T extends IdDateAudit> {
      */
     @PostMapping
     public ResponseEntity<Object> create(@Valid @RequestBody T entity) {
-        entity.setId(null);
         T savedStudent = repository.save(entity);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
