@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface StudentRepository extends JpaRepository<Student,Long> {
+public interface StudentRepository extends JpaRepository<Student,Integer> {
 
     @Query(value = "Select sum(b.totalDate) from Student s left join s.blocks b where s.studentId=:studentId")
     public Long getTotalDay(Integer studentId);

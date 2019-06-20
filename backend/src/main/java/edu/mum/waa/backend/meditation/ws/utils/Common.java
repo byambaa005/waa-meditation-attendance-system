@@ -1,7 +1,11 @@
 package edu.mum.waa.backend.meditation.ws.utils;
 
+import edu.mum.waa.backend.meditation.ws.entity.Block;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -38,17 +42,17 @@ public class Common {
 
     }
 
-//
-//    public static List<LocalDate> getAllDateOfBlock(BlockEntity blockEntity) {
-//        LocalDate start =blockEntity.getStartDate();
-//        LocalDate end = blockEntity.getEndDate();
-//        List<LocalDate> totalDates = new ArrayList<>();
-//        while (!start.isAfter(end)) {
-//            if (start.getDayOfWeek() != DayOfWeek.SUNDAY) {
-//                totalDates.add(start);
-//            }
-//                start = start.plusDays(1);
-//        }
-//        return totalDates;
-//    }
+
+    public static List<LocalDate> getAllDateOfBlock(Block block) {
+        LocalDate start =block.getStartDate();
+        LocalDate end = block.getEndDate();
+        List<LocalDate> totalDates = new ArrayList<>();
+        while (!start.isAfter(end)) {
+            if (start.getDayOfWeek() != DayOfWeek.SUNDAY) {
+                totalDates.add(start);
+            }
+                start = start.plusDays(1);
+        }
+        return totalDates;
+    }
 }

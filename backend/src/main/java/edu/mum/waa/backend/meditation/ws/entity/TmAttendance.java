@@ -43,6 +43,7 @@ public class TmAttendance extends IdDateAudit{
     @Column(name = "Name")
     private String name;
 
+
     public TmAttendance(LocalDate date,Integer studentId, String type, String name) {
         this.studentId = studentId;
         this.date = date;

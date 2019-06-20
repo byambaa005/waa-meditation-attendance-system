@@ -3,6 +3,7 @@ package edu.mum.waa.backend.meditation.ws.controller;
 import edu.mum.waa.backend.meditation.ws.entity.Block;
 import edu.mum.waa.backend.meditation.ws.entity.Student;
 import edu.mum.waa.backend.meditation.ws.entity.TmAttendance;
+import edu.mum.waa.backend.meditation.ws.model.AttendDetail;
 import edu.mum.waa.backend.meditation.ws.model.AttendanceReport;
 import edu.mum.waa.backend.meditation.ws.repository.BlockRepository;
 import edu.mum.waa.backend.meditation.ws.repository.StudentRepository;
@@ -12,10 +13,7 @@ import edu.mum.waa.backend.meditation.ws.utils.Common;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -52,5 +50,9 @@ public class StudentController {
 
         return studentService.generateReportByStudentId(studentId);
     }
+    @GetMapping("/attendance-detail")
+    public List<AttendDetail> getAttendanceDetail(@RequestParam(name="studentId") Integer studentId,@RequestParam("blockId") Long blockId){
 
+        return studentService.getAttandDetail(blockId,studentId);
+    }
 }
