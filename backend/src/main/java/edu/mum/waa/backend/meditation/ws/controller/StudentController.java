@@ -1,6 +1,7 @@
 package edu.mum.waa.backend.meditation.ws.controller;
 
 import edu.mum.waa.backend.meditation.ws.entity.Block;
+import edu.mum.waa.backend.meditation.ws.entity.Student;
 import edu.mum.waa.backend.meditation.ws.entity.TmAttendance;
 import edu.mum.waa.backend.meditation.ws.model.AttendanceReport;
 import edu.mum.waa.backend.meditation.ws.repository.BlockRepository;
@@ -29,6 +30,11 @@ public class StudentController {
 
     @Autowired
     StudentRepository studentRepository;
+
+    @GetMapping("/getByUserId")
+    public Student getByUserId(@RequestParam(name="userId") Long userId){
+        return studentRepository.findUserByStudentId(userId);
+    }
 
     @GetMapping("/attendance-block")
     public AttendanceReport generateReportByBlock(@RequestParam(name="studentId") Integer studentId,@RequestParam(name = "blockId") Long blockId){

@@ -1,6 +1,7 @@
 package edu.mum.waa.backend.meditation.ws.repository;
 
 import edu.mum.waa.backend.meditation.ws.entity.Student;
+import edu.mum.waa.backend.meditation.ws.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -8,7 +9,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StudentRepository extends JpaRepository<Student,Long> {
 
-@Query(value = "Select sum(b.totalDate) from Student s left join s.blocks b where s.studentId=:studentId")
-public Long getTotalDay(Integer studentId);
+    @Query(value = "Select sum(b.totalDate) from Student s left join s.blocks b where s.studentId=:studentId")
+    public Long getTotalDay(Integer studentId);
+
+    @Query(value = "Select s from Student s where s.user.id=:userId")
+    public Student findUserByStudentId(Long userId);
 
 }

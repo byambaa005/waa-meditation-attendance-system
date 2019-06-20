@@ -27,6 +27,10 @@ public class Student {
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL )
     private List<TmCheck> tmCheckList;
 
+    @OneToOne()
+    @JoinColumn(name = "user_id")
+    private User user;
+
 //    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "student_blocks",

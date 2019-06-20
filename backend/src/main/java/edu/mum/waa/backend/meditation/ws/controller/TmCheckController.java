@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/crud/checks")
-@PreAuthorize("hasRole('USER')")
+@PreAuthorize("hasRole('USER') or hasRole('FACULTY') or hasRole('ADMIN')")
 public class TmCheckController extends RestCrudController<TmCheck> {
 
     private static final Logger logger = LoggerFactory.getLogger(TmCheckController.class);
