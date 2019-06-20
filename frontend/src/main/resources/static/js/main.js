@@ -53,11 +53,11 @@ $(document).ready(function() {
     });
     $("#selectReportBlock").change(function () {
 
-        console.log("changinggggggg");
+        console.log("changingggggggsedse");
         $("#reportDetail").empty();
         let blockId = $('#block option:selected').val();
         if (blockId !== '0') {
-            let urlDetail = '/report/blockreport/detail';
+            let urlDetail = '/report/blockreport/detail/' + blockId;;
             $("#reportDetail").load(urlDetail);
         }
     });

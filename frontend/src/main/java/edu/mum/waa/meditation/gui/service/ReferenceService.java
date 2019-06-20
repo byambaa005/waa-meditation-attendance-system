@@ -1,6 +1,9 @@
 package edu.mum.waa.meditation.gui.service;
 
+import edu.mum.waa.meditation.gui.model.AttendDetailReport;
+import edu.mum.waa.meditation.gui.model.AttendanceReport;
 import edu.mum.waa.meditation.gui.model.Block;
+import edu.mum.waa.meditation.gui.model.BlockSummaryReport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.PagedResources;
@@ -36,14 +39,13 @@ public class ReferenceService {
         return blocks;
     }
 
-    public Collection<Block>  getBlockReports(Long blockId, HttpSession session){
+    public BlockSummaryReport  getBlockReports(Long blockId, HttpSession session){
         RestTemplate restTemplate = new RestTemplate();
-        //Get blocks list
-        ResponseEntity<PagedResources<Block>> blocksResponse = restTemplate.exchange(BLOCKS_URL,
-                HttpMethod.GET, new HttpEntity<>("parameters", buildHeader(session)), new ParameterizedTypeReference<PagedResources<Block>>() {
-                });
-        PagedResources<Block> Block = blocksResponse.getBody();
-        Collection<Block> blocks = Block.getContent();
-        return blocks;
+        String studentAttendanceByBlockUrl = "http://localhost:8082/api/user/attendance-block-summary?blockId=" + blockId;
+        ResponseEntity<BlockSummaryReport> blockResponse = restTemplate.exchange(studentAttendanceByBlockUrl,
+                HttpMethod.GET, new HttpEntity<>("parameters", buildHeader(session)), new ParameterizedTypeReference<BlockSummaryReport>() {});
+        BlockSummaryReport studentAttendanceByBlockResponses = blockResponse.getBody();
+
+        return studentAttendanceByBlockResponses;
     }
 }

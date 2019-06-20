@@ -19,25 +19,26 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
 </head>
 <body>
-<div th:fragment="reportDetail" th:unless="${#lists.isEmpty(blockReport)}" id="report-table">
+<div th:fragment="reportDetail" th:unless="${#lists.isEmpty(attendanceInfoByBlock)}" id="report-table">
     <h2> Block report</h2>
-    <!--<p>Total sessions possible: <span th:text="${attendanceInfoByBlock.getRequiredAttendance()}"/></p>-->
-    <!--<p>Days present: <span th:text="${attendanceInfoByBlock.getAttendence()}"/></p>-->
-    <!--<p>Percentage attended: : <span th:text="${attendanceInfoByBlock.getPercentage()}"/></p>-->
-    <!--<p>Extra credit points: : <span th:text="${attendanceInfoByBlock.getExtraPoint()}"/></p>-->
-
     <table class="table table-striped table-bordered table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl">
         <thead>
         <tr>
-            <th class="align-middle">Date</th>
-            <th class="align-middle">Present</th>
+            <th class="align-middle">studentId</th>
+            <th class="align-middle">attended</th>
+            <th class="align-middle">required</th>
+            <th class="align-middle">percentage</th>
+            <th class="align-middle">bonusPoint</th>
         </tr>
         </thead>
         <tbody>
-        <!--<tr th:each="attend : ${blockReport.getReports()}">-->
-            <!--<td class="align-middle"><span th:text="${attend.getDate()}"></span></td>-->
-            <!--<td class="align-middle"><span>true</span></td>-->
-        <!--</tr>-->
+        <tr th:each="attend : ${attendanceInfoByBlock.getAttendanceList()}">
+            <td class="align-middle"><span th:text="${attend.getStudentId()}"></span></td>
+            <td class="align-middle"><span th:text="${attend.getAttended()}"></span></td>
+            <td class="align-middle"><span th:text="${attend.getRequired()}"></span></td>
+            <td class="align-middle"><span th:text="${#numbers.formatDecimal(attend.getPercentage(),2,3)}"></span></td>
+            <td class="align-middle"><span th:text="${#numbers.formatDecimal(attend.getBonusPoint(),2,3)}"></span></td>
+        </tr>
         </tbody>
     </table>
 </div>
